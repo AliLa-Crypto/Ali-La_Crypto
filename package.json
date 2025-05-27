@@ -5,6 +5,7 @@
     "start-all": "concurrently \"npm run dev --prefix Frontend_Alila_Crypto\" \"npm run start --prefix BackEnd_AliLa_Crypto\""
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "standard-version": "^9.5.0"
   }
 }
