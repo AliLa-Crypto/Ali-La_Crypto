@@ -19,7 +19,7 @@ export const verifyToken = (req, res, next) => {
   }
 };
 
-// ✅ Middleware per controllare il livello richiesto
+// Middleware per controllare il livello richiesto
 export const checkLevel = (requiredLevel) => {
   return (req, res, next) => {
     if (!req.user || !req.user.level) {
@@ -34,7 +34,7 @@ export const checkLevel = (requiredLevel) => {
   };
 };
 
-// 🔐 (Bonus) Middleware per accesso admin
+// (Bonus) Middleware per accesso admin
 export const checkAdmin = (req, res, next) => {
   if (!req.user || !req.user.isAdmin) {
     return res.status(403).json({ message: "Accesso riservato agli amministratori" });

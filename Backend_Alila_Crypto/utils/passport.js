@@ -45,12 +45,12 @@ passport.use(
   )
 );
 
-// 🔐 Serializzazione
+// Serializzazione
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-// 🔓 Deserializzazione
+// Deserializzazione
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);

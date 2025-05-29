@@ -1,0 +1,8 @@
+/* Rende il menu a tendina assoluto rispetto al body */
+.dropdown-absolute .dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0;
+  z-index: 1050;
+  margin-top: 0.5rem;
+}

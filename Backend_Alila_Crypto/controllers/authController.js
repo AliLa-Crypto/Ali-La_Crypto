@@ -66,7 +66,7 @@ export const login = async (req, res) => {
   }
 };
 
-// ✅ LOGIN CON 2FA – invia codice via email
+// LOGIN CON 2FA – invia codice via email
 export const loginWith2FA = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -100,7 +100,7 @@ export const loginWith2FA = async (req, res) => {
   }
 };
 
-// ✅ VERIFICA CODICE 2FA – rilascia JWT
+// VERIFICA CODICE 2FA – rilascia JWT
 export const verify2FA = async (req, res) => {
   try {
     const { email, code } = req.body;
