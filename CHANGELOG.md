@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.3.0...v1.4.0) (2025-05-29)
+
+
+### Features
+
+* aggiunta Navbar per FrontEnd ([c4e810f](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/c4e810f9f9d2275687d7cb4dd09d2a84d3482544))
+
 ## [1.3.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.2.0...v1.3.0) (2025-05-28)
 
 
