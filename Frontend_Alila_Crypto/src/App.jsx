@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginSuccess from "./Components/LoginSuccess";
 import { MyNavbar } from "./Components/MyNavbar";
 import HeroSection from './Components/HeroSection';
+import LevelSelector from './Components/LevelSelector';
 import Footer from "./Components/Footer";
 
 
@@ -12,6 +13,7 @@ function App() {
     <Router>
       <MyNavbar />
       <HeroSection />
+      <LevelSelector />
       <Routes>
         {/* altre rotte */}
         <Route path="/login-success" element={<LoginSuccess />} />

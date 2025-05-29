@@ -1,5 +1,5 @@
 .hero-section {
-  min-height: 60vh;
+  min-height: 50vh !important;
   display: flex;
   align-items: center;
 }
@@ -23,6 +23,10 @@
 
 /* Desktop (lg e oltre) */
 @media (min-width: 992px) {
+  .hero-section {
+    max-height: 60vh;
+  }
+  
   .hero-img {
     max-width: 55% !important;
   }
