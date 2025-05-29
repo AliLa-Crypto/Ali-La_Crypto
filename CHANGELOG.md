@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.6.0...v1.7.0) (2025-05-29)
+
+
+### Features
+
+* aggiunta Componente LevelSelector ([418cf4e](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/418cf4e184c9cc79248630a7e30b33b3e02bee5f))
+
 ## [1.6.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.5.0...v1.6.0) (2025-05-29)
 
 
