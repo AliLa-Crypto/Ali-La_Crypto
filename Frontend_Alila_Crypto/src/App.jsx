@@ -2,6 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginSuccess from "./Components/LoginSuccess";
 import { MyNavbar } from "./Components/MyNavbar";
+import Footer from "./Components/Footer";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         {/* es. dashboard utente */}
         <Route path="/dashboard" element={<p>Benvenuto nella dashboard!</p>} />
       </Routes>
+      <Footer />  {/* Footer visibile su tutte le pagine */}
     </Router>
   )
 }
