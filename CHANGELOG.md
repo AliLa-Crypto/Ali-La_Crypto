@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.4.0...v1.5.0) (2025-05-29)
+
+
+### Features
+
+* aggiunta del footer ([6141b23](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/6141b23ea0a16235854815a7bba8291e4e06a60d))
+
 ## [1.4.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.3.0...v1.4.0) (2025-05-29)
 
 
