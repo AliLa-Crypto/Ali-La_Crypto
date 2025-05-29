@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.5.0...v1.6.0) (2025-05-29)
+
+
+### Features
+
+* aggiunta HeroSection ([870f181](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/870f181f55602227b7a56e0b5268a53efae6c4e2))
+
 ## [1.5.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.4.0...v1.5.0) (2025-05-29)
 
 
