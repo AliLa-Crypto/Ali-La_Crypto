@@ -1,6 +1,7 @@
 import { Navbar, Nav, Container, NavDropdown, Offcanvas } from 'react-bootstrap';
 import logo from '../assets/logo3.png';
 import { isUserLoggedIn } from '../utils/auth';
+import { Link } from "react-router-dom";
 
 export function MyNavbar() {
   const loggedIn = isUserLoggedIn(); // check login
@@ -23,14 +24,15 @@ export function MyNavbar() {
         {/* 🔹 Chi siamo + Tool sempre visibili per sm/md */}
         <div className="d-lg-none d-flex ms-auto align-items-center gap-3">
           <Nav className="d-flex flex-row align-items-center">
-            <Nav.Link href="#about" className="text-white me-4">Chi siamo</Nav.Link>
+            <Nav.Link className='text-white me-3' as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/about" className="text-white me-4">Chi siamo</Nav.Link>
             <NavDropdown title="Tool" id="tool-dropdown-sm" menuVariant="dark" 
                          className="me-4 dropdown-absolute">
-              <NavDropdown.Item href="#exchange">Exchange</NavDropdown.Item>
-              <NavDropdown.Item href="#wallet">Wallet</NavDropdown.Item>
-              <NavDropdown.Item href="#market">Analisi Mercato</NavDropdown.Item>
-              <NavDropdown.Item href="#explorer">Explorer</NavDropdown.Item>
-              <NavDropdown.Item href="#trading">Trading</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/exchange">Exchange</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/wallet">Wallet</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/market">Analisi Mercato</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/explorer">Explorer</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/trading">Trading</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </div>
@@ -51,52 +53,46 @@ export function MyNavbar() {
           <Offcanvas.Body>
             <Nav className="flex-grow-1 pe-3 fs-5">
               {/* 🔸 Solo visibile da lg in su */}
-              <div className="d-none d-lg-flex w-100 justify-content-end align-items-center gap-4">
-                <Nav.Link href="#about">Chi siamo</Nav.Link>
+              <div className="d-none d-lg-flex w-100 justify-content-end align-items-center gap-2">
+                <Nav.Link className='text-white me-3' as={Link} to="/">Home</Nav.Link>
+                <Nav.Link as={Link} to="/about">Chi siamo</Nav.Link>
                 <NavDropdown title="Tool" id="tool-dropdown-lg">
-                  <NavDropdown.Item href="#exchange">Exchange</NavDropdown.Item>
-                  <NavDropdown.Item href="#wallet">Wallet</NavDropdown.Item>
-                  <NavDropdown.Item href="#market">Analisi Mercato</NavDropdown.Item>
-                  <NavDropdown.Item href="#explorer">Explorer</NavDropdown.Item>
-                  <NavDropdown.Item href="#trading">Trading</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/exchange">Exchange</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/wallet">Wallet</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/market">Analisi Mercato</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/explorer">Explorer</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/trading">Trading</NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Feed" id="feed-dropdown">
-                  <NavDropdown.Item href="#news">News</NavDropdown.Item>
-                  <NavDropdown.Item href="#articoli">Articoli</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/news">News</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/articoli">Articoli</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="#finanza">Finanza personale</Nav.Link>
-                <Nav.Link href="#glossario">Glossario</Nav.Link>
-                <Nav.Link href="#carrello">Carrello</Nav.Link>
+                <Nav.Link as={Link} to="/finanza">Finanza personale</Nav.Link>
+                <Nav.Link as={Link} to="/glossario">Glossario</Nav.Link>
+                <Nav.Link as={Link} to="/carrello">Carrello</Nav.Link>
 
                 {!loggedIn ? (
-                  <>
-                    <Nav.Link href="/login" className="btn btn-outline-light">Accedi</Nav.Link>
-                    <Nav.Link href="/register" 
-                              className="btn btn-outline-light ms-2">Registrati</Nav.Link>
-                  </>
+                  <Nav.Link as={Link} to="/login" className="btn btn-outline-light">Accedi</Nav.Link>
                 ) : (
-                  <Nav.Link href="/profilo" className="btn btn-outline-light">Profilo</Nav.Link>
+                  <Nav.Link as={Link} to="/profilo" className="btn btn-outline-light">Profilo</Nav.Link>
                 )}
               </div>
 
               {/* 🔸 Solo sm/md – voci che non sono già sopra */}
               <div className="d-lg-none">
                 <NavDropdown title="Feed" id="feed-dropdown-sm" menuVariant="dark">
-                  <NavDropdown.Item href="#news">News</NavDropdown.Item>
-                  <NavDropdown.Item href="#articoli">Articoli</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/news">News</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/articoli">Articoli</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="#finanza">Finanza personale</Nav.Link>
-                <Nav.Link href="#glossario">Glossario</Nav.Link>
-                <Nav.Link href="#carrello">Carrello</Nav.Link>
+                <Nav.Link as={Link} to="/finanza">Finanza personale</Nav.Link>
+                <Nav.Link as={Link} to="/glossario">Glossario</Nav.Link>
+                <Nav.Link as={Link} to="/carrello">Carrello</Nav.Link>
 
                 {!loggedIn ? (
-                  <>
-                    <Nav.Link href="/login" className="btn btn-outline-light mt-3">Accedi</Nav.Link>
-                    <Nav.Link href="/register" 
-                              className="btn btn-outline-light mt-2">Registrati</Nav.Link>
-                  </>
+                  <Nav.Link as={Link} to="/login" className="btn btn-outline-light mt-3">Accedi</Nav.Link>
                 ) : (
-                  <Nav.Link href="/profilo" className="btn btn-outline-light mt-3">Profilo</Nav.Link>
+                  <Nav.Link as={Link} to="/profilo" 
+                     className="btn btn-outline-light mt-3">Profilo</Nav.Link>
                 )}
               </div>
             </Nav>

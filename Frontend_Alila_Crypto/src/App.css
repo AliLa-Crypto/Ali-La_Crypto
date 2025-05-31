@@ -1,3 +1,18 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1; /* prende tutto lo spazio disponibile */
+}
+
 /* Rende il menu a tendina assoluto rispetto al body */
 .dropdown-absolute .dropdown-menu {
   position: absolute !important;

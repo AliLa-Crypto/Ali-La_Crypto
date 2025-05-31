@@ -1,0 +1,36 @@
+form {
+  background-color: #000033;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+form label {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+form input {
+  background-color: #1a1a40;
+  border: 1px solid #444;
+  color: #fff;
+}
+
+form input::placeholder {
+  color: #999;
+}
+
+form .form-check-label {
+  color: #ccc;
+}
+
+.text-danger.small {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: #ff4d4d;
+}
+
+button[type="submit"] {
+  width: 100%;
+}

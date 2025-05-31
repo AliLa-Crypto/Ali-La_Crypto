@@ -1,0 +1,11 @@
+.features-section {
+  background-color: #000033;
+}
+
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
