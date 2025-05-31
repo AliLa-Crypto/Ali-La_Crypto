@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.7.0...v1.8.0) (2025-05-31)
+
+
+### Features
+
+* aggiunta pagine HomePage, RegisterPage, LoginPage, SelectedLevelPage e eventuali css ([ddaab7f](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/ddaab7fbbdbf722788987ea91b94952fc56cc1b0))
+
 ## [1.7.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.6.0...v1.7.0) (2025-05-29)
 
 
