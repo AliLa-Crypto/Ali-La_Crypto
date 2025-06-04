@@ -1,6 +1,6 @@
 {
   "name": "alila-crypto-root",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "scripts": {
     "release": "standard-version",
     "start-all": "concurrently \"npm run dev --prefix Frontend_Alila_Crypto\" \"npm run start --prefix BackEnd_AliLa_Crypto\""

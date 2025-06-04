@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.1](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.8.0...v1.8.1) (2025-06-04)
+
+
+### Bug Fixes
+
+* corretto bug nella registrazione ([3e4a14f](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/3e4a14f5bc1e9c3d1e2fdffabcc395fdca6d0c7d))
+
 ## [1.8.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.7.0...v1.8.0) (2025-05-31)
 
 
