@@ -32,7 +32,7 @@ passport.use(
             username: finalUsername,
             email: profile.emails[0].value,
             socialID: profile.id,
-            level: "Beginner",
+            level: "principiante",
           });
         }
 
@@ -50,7 +50,7 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-// Deserializzazione
+// De serializzazione
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);

@@ -11,20 +11,16 @@ router.get("/dashboard", verifyToken, (req, res) => {
   });
 });
 
-// 🔐 Accesso SOLO per utenti con livello 'Beginner'
-router.get("/beginner", verifyToken, checkLevel("Beginner"), (req, res) => {
-  res.json({
-    message: "✅ Accesso autorizzato per Beginner!",
-    user: req.user,
-  });
+router.get("/principiante", verifyToken, checkLevel("Principiante"), (req, res) => {
+  res.json({ message: "✅ Accesso autorizzato per Principiante!", user: req.user });
 });
 
-// 🔐 Accesso SOLO per utenti con livello 'Pro'
+router.get("/intermedio", verifyToken, checkLevel("Intermedio"), (req, res) => {
+  res.json({ message: "✅ Accesso autorizzato per Intermedio!", user: req.user });
+});
+
 router.get("/pro", verifyToken, checkLevel("Pro"), (req, res) => {
-  res.json({
-    message: "🔒 Accesso riservato agli utenti Pro",
-    user: req.user,
-  });
+  res.json({ message: "🔒 Accesso riservato agli utenti Pro", user: req.user });
 });
 
 export default router;

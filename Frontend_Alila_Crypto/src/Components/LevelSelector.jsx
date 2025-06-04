@@ -12,9 +12,9 @@ function LevelSelector() {
   };
 
   return (
-    <section id="livelli" className="py-5 text-light">
+    <section id="livelli" className="py-3 text-light">
       <Container>
-        <h2 className="text-center fw-bold mb-5 display-5">Scegli il tuo livello</h2>
+        <h2 className="text-center fw-bold mb-5 display-5">Inizia oggi il tuo viaggio nelle crypto: scegli il livello più adatto a te!</h2>
         <Row className="g-5 justify-content-center">
           <Col md={4}>
             <Card className="text-center border-warning h-100">

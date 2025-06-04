@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { FaBookOpen, FaUsers, FaChartLine } from "react-icons/fa";
-import "../styles/WhatYouCanDo.css";
+import "@/styles/WhatYouCanDo.css";
 
 function WhatYouCanDo() {
   return (
@@ -19,7 +19,7 @@ function WhatYouCanDo() {
           <Col md={4}>
             <div className="feature-card p-4 bg-dark rounded shadow-sm h-100">
               <FaUsers size={40} className="mb-3 text-success" />
-              <h5 className="fw-bold">Connetterti</h5>
+              <h5 className="fw-bold">Community</h5>
               <p>Partecipa alla community, forum, feed e gruppi tematici per utenti.</p>
             </div>
           </Col>

@@ -26,7 +26,7 @@ export const checkLevel = (requiredLevel) => {
       return res.status(403).json({ message: "Utente non autorizzato" });
     }
 
-    if (req.user.level !== requiredLevel) {
+    if (req.user.level.toLowerCase() !== requiredLevel.toLowerCase()) {
       return res.status(403).json({ message: `Accesso riservato a utenti di livello: ${requiredLevel}` });
     }
 
@@ -34,7 +34,7 @@ export const checkLevel = (requiredLevel) => {
   };
 };
 
-// (Bonus) Middleware per accesso admin
+// Middleware per accesso admin
 export const checkAdmin = (req, res, next) => {
   if (!req.user || !req.user.isAdmin) {
     return res.status(403).json({ message: "Accesso riservato agli amministratori" });

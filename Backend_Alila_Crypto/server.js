@@ -6,7 +6,7 @@ import connectDB from "./db.js";
 // Import sessione e passport
 import session from "express-session";
 import passport from "passport";
-import "./utils/passport.js"; // inizializza la strategia Google
+import "./utils/passport.js";
 
 // Import ROUTERS
 import authRoutes from "./routes/authRoutes.js";
@@ -24,7 +24,7 @@ app.use(express.json());
 // Middleware per la sessione
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "alilacrypto", // Lo metto anche nel .env
+    secret: process.env.SESSION_SECRET || "alilacrypto",
     resave: false,
     saveUninitialized: true,
   })
@@ -42,7 +42,7 @@ connectDB();
 app.use("/api/auth", authRoutes);
 app.use("/api/protected", protectedRoutes);
 
-// Rotte base di test
+// Rotta base di test
 app.get("/", (req, res) => {
   res.send("🚀 Backend Ali&La Crypto attivo!");
 });

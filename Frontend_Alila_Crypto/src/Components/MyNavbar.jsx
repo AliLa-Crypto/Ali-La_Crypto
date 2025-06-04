@@ -2,9 +2,12 @@ import { Navbar, Nav, Container, NavDropdown, Offcanvas } from 'react-bootstrap'
 import logo from '../assets/logo3.png';
 import { isUserLoggedIn } from '../utils/auth';
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // <== IMPORTA
 
 export function MyNavbar() {
-  const loggedIn = isUserLoggedIn(); // check login
+  
+  const { user } = useAuth();
+  const loggedIn = !!user;    // check login
 
   return (
     <Navbar key="lg" expand="lg" bg="dark" variant="dark" sticky="top" className="py-3">

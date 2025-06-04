@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import logo from '../assets/SoloLogo.png';
-import "../styles/HeroSection.css"
+import logo from '@/assets/SoloLogo.png';
+import "@/styles/HeroSection.css"
 
 function HeroSection() {
   return (

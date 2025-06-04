@@ -23,6 +23,18 @@ Ogni modulo ha uno scopo chiaro, funzionalità progressive e tecnologie mirate! 
 - 3 pulsanti-livello (🟡🟢🔴)
 - Descrizioni + routing dinamico
 - Animazione mascotte (facoltativo)
+La struttura descritta in dettaglio:
+🧭 1. Navbar (barra di navigazione in alto)
+🔹 2. Footer
+🎯 3. HeroSection (titolo principale + call to action)
+🧩 4. LevelSelector - Sezione “Livelli” (ingaggio con 3 pulsanti)
+🔹 5. HomePage 
+🔹 6. RegisterPage
+🔹 7. LoginPage
+🧠 8. Autenticazione FrontEnd con Backend
+🧠 9. WellcomePage 
+🧠 10. Dashboard 
+🧠 11. Pagina Profilo
 
 ---
 

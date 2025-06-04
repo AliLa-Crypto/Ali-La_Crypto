@@ -1,26 +1,31 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { Container, Form, Button, InputGroup } from "react-bootstrap";
+import { useParams, useNavigate } from "react-router-dom";
+import { Container, Form, Button, InputGroup, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import "../styles/RegisterPage.css";
+import axios from "axios";
+import "@/styles/RegisterPage.css";
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../../context/AuthContext"; // <== IMPORTA
+
 
 function RegisterPage() {
-  
   const { level } = useParams();
-  const selectedLevel = level || "";
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [serverError, setServerError] = useState("");
 
   const formattedLevel =
-    selectedLevel === "principiante"
+    level === "principiante"
       ? "Principiante"
-      : selectedLevel === "intermedio"
+      : level === "intermedio"
       ? "Intermedio"
-      : selectedLevel === "pro"
+      : level === "pro"
       ? "Pro"
       : "";
 
-  // 👁️ password toggle
   const [showPassword, setShowPassword] = useState(false);
 
   const schema = Yup.object().shape({
@@ -39,20 +44,39 @@ function RegisterPage() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data) => {
-    alert(`Registrazione inviata per livello ${formattedLevel || data.selectedLevel}`);
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      setServerError(""); // reset errori precedenti
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/register`, {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+        level: formattedLevel || "principiante",
+      });
+
+      if (response.status === 201) {
+        const token = response.data.token;
+        if (token) login(token); // <== aggiorna il context
+        navigate(`/welcome/${level}`);
+      }
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.message) {
+        setServerError(err.response.data.message);
+      } else {
+        setServerError("Errore nella registrazione. Riprova.");
+      }
+    }
   };
 
   return (
     <Container className="py-5 text-light">
       <h2 className="mb-4">Registrazione</h2>
       <Form onSubmit={handleSubmit(onSubmit)} className="bg-dark p-4 rounded shadow">
-
+        {serverError && <Alert variant="danger">{serverError}</Alert>}
 
         {level && (
           <p className="mb-3">
-            Livello selezionato: <strong>{formattedLevel}</strong>
+            Livello selezionato: <strong>{level}</strong>
           </p>
         )}
 
@@ -85,11 +109,16 @@ function RegisterPage() {
 
         <Form.Group className="mb-3">
           <Form.Label>Conferma Password</Form.Label>
-          <Form.Control
-            type={showPassword ? "text" : "password"}
-            placeholder="Conferma la password"
-            {...register("confirmPassword")}
-          />
+          <InputGroup>
+            <Form.Control
+              type={showPassword ? "text" : "password"}
+              placeholder="Conferma la password"
+              {...register("confirmPassword")}
+            />
+            <Button variant="secondary" onClick={() => setShowPassword((prev) => !prev)}>
+              👁️
+            </Button>
+          </InputGroup>
           <p className="text-danger small">{errors.confirmPassword?.message}</p>
         </Form.Group>
 
@@ -106,6 +135,44 @@ function RegisterPage() {
           Registrati
         </Button>
       </Form>
+
+      <p className="text-center mt-4">oppure</p>
+      <div className="d-flex justify-content-center mt-2">
+        <GoogleLogin
+          onSuccess={async (credentialResponse) => {
+            const googleToken = credentialResponse.credential;
+
+            if (!googleToken) {
+              alert("Token Google mancante");
+              return;
+            }
+
+            try {
+              const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/google-popup`, {
+                token: googleToken,
+              });
+
+              const { token, user, isNewUser } = response.data;
+
+              login(token); // <-- aggiorna lo stato globale e localStorage
+
+              if (isNewUser) {
+                navigate(`/welcome/${user.level.toLowerCase()}`);
+              } else {
+                navigate(`/dashboard/${user.level.toLowerCase()}`);
+              }
+            } catch (err) {
+              console.error("❌ Errore Google Login:", err);
+              alert("Errore durante la registrazione con Google");
+            }
+          }}
+          onError={() => {
+            alert("Errore Google Login");
+          }}
+        />
+
+      </div>
+
     </Container>
   );
 }
