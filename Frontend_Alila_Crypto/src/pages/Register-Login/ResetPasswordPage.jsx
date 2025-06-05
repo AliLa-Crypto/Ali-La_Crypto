@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Form, Button, InputGroup, Alert } from "react-bootstrap";
-import axios from "axios";
+import api from "@/utils/api";
 
 const ResetPasswordPage = () => {
   const { token } = useParams();
@@ -20,7 +20,7 @@ const ResetPasswordPage = () => {
     }
 
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/reset-password/${token}`, {
+      await api.post(`/auth/reset-password/${token}`, {
         newPassword,
       });
       setMessage("Password aggiornata. Ora puoi accedere.");

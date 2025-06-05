@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
-import axios from "axios";
+import api from "@/utils/api";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +9,7 @@ const ForgotPasswordPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/forgot-password`, { email });
+      await api.post(`/auth/forgot-password`, { email });
       setMessage("Controlla la tua email per reimpostare la password.");
     } catch (err) {
       setMessage("Errore. Riprova.");

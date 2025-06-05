@@ -217,13 +217,10 @@ export const resetPassword = async (req, res) => {
   }
 };
 
-// Autenticazione con Google 
+// Autenticazione con Google Popup
 export const loginWithGooglePopup = async (req, res) => {
   try {
     const { token } = req.body;
-
-    console.log("📥 Token ricevuto da frontend:", token);
-    console.log("📌 Audience attesa:", process.env.GOOGLE_CLIENT_ID);
 
     const ticket = await client.verifyIdToken({
       idToken: token,
@@ -232,18 +229,26 @@ export const loginWithGooglePopup = async (req, res) => {
 
     const payload = ticket.getPayload();
 
-    // Cerca o crea utente
     let user = await User.findOne({ email: payload.email });
-
     let isNewUser = false;
 
     if (!user) {
+      // 🔁 Genera username unico
+      let baseUsername = payload.name || payload.email.split('@')[0];
+      let uniqueUsername = baseUsername;
+      let counter = 1;
+
+      while (await User.findOne({ username: uniqueUsername })) {
+        uniqueUsername = `${baseUsername}-${counter++}`;
+      }
+
       user = await User.create({
-        username: payload.name,
+        username: uniqueUsername,
         email: payload.email,
         socialID: payload.sub,
         level: "principiante",
       });
+
       isNewUser = true;
     }
 
@@ -254,6 +259,7 @@ export const loginWithGooglePopup = async (req, res) => {
     );
 
     res.status(200).json({ token: jwtToken, user, isNewUser });
+
   } catch (err) {
     console.error("❌ Errore Google Login:", err.response?.data || err.message || err);
     res.status(401).json({ message: "Token Google non valido" });

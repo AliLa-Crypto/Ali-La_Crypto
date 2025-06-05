@@ -4,10 +4,9 @@ import { Container, Form, Button, InputGroup, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import axios from "axios";
+import api from "@/utils/api";
 import "@/styles/RegisterPage.css";
 import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from "jwt-decode";
 import { useAuth } from "../../context/AuthContext"; // <== IMPORTA
 
 
@@ -47,7 +46,7 @@ function RegisterPage() {
   const onSubmit = async (data) => {
     try {
       setServerError(""); // reset errori precedenti
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/register`, {
+      const response = await api.post(`/auth/register`, {
         username: data.username,
         email: data.email,
         password: data.password,
@@ -148,7 +147,7 @@ function RegisterPage() {
             }
 
             try {
-              const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/google-popup`, {
+              const response = await api.post(`/auth/google-popup`, {
                 token: googleToken,
               });
 

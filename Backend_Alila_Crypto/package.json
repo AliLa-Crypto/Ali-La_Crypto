@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",
+    "dev": "nodemon server.js",
     "start": "nodemon server.js"
   },
   "keywords": [],
@@ -15,18 +15,18 @@
   "dependencies": {
     "@sendgrid/mail": "^8.1.5",
     "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.6.1",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "express-session": "^1.18.1",
     "google-auth-library": "^9.15.1",
+    "heic-convert": "^2.1.0",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "mongoose": "^8.15.0",
-    "multer": "^2.0.0",
+    "multer": "^2.0.1",
     "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^3.1.10",
-    "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0"
+    "sharp": "^0.34.2"
   }
 }

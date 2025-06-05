@@ -11,10 +11,14 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
+        const storedAvatar = localStorage.getItem("avatarURL") || "";
+
         setUser({
           level: decoded.level,
           isAdmin: decoded.isAdmin,
+          avatarURL: storedAvatar, // ✅ recupera avatar salvato
         });
+
       } catch (err) {
         console.error("Token non valido", err);
         localStorage.removeItem("accessToken");
@@ -29,10 +33,14 @@ export const AuthProvider = ({ children }) => {
       const decoded = jwtDecode(token);
       localStorage.setItem("accessToken", token);
       localStorage.setItem("userLevel", decoded.level.toLowerCase());
+      const storedAvatar = localStorage.getItem("avatarURL") || "";
+
       setUser({
         level: decoded.level,
         isAdmin: decoded.isAdmin,
+        avatarURL: storedAvatar, // ✅ salva anche qui
       });
+
     } catch (err) {
       console.error("Errore nel salvataggio login:", err);
     }
@@ -45,7 +53,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, setUser }}>
       {children}
     </AuthContext.Provider>
   );

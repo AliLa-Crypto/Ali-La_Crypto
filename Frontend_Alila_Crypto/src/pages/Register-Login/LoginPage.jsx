@@ -2,42 +2,36 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Form, Button, Alert, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { GoogleLogin } from '@react-oauth/google';
-import { useAuth } from "../../context/AuthContext";
-import { jwtDecode } from "jwt-decode";
+import api from "@/utils/api";
+import { useAuth } from "@/context/AuthContext";
+import GoogleLoginButton from "@/components/GoogleLoginButton"; // ✅ IMPORT COMPONENTE
 
 function LoginPage() {
   const navigate = useNavigate();
-  const { login } = useAuth(); // <== USA IL CONTEXT
-
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
+      const response = await api.post(`/auth/login`, {
         email: data.email,
         password: data.password,
       });
 
       const { token, user } = response.data;
 
-      login(token); // <== aggiorna lo stato globale e localStorage
-
-      // ✅ Reindirizza alla dashboard
+      login(token); // Salva il token nel context e nel localStorage
       navigate(`/dashboard/${user.level.toLowerCase()}`);
     } catch (err) {
       alert(err.response?.data?.message || "Errore durante il login");
     }
   };
-
 
   return (
     <Container className="py-5 text-light">
@@ -69,37 +63,15 @@ function LoginPage() {
           {errors.password && <Alert variant="warning" className="mt-2">{errors.password.message}</Alert>}
         </Form.Group>
 
-        <Button variant="primary" type="submit" className="fw-bold">
+        <Button variant="primary" type="submit" className="fw-bold w-100">
           Accedi
         </Button>
 
         <p className="text-center mt-4">oppure</p>
+
         <div className="d-flex justify-content-center mt-2">
-          <GoogleLogin
-            onSuccess={async (credentialResponse) => {
-              const googleToken = credentialResponse.credential;
-
-              try {
-                const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/google-popup`, {
-                  token: googleToken,
-                });
-
-                const { token, user } = response.data;
-
-                localStorage.setItem("accessToken", token);
-                localStorage.setItem("userLevel", user.level.toLowerCase());
-
-                navigate(`/dashboard/${user.level.toLowerCase()}`);
-              } catch (err) {
-                alert("Errore durante il login con Google");
-              }
-            }}
-            onError={() => {
-              alert("Errore Google Login");
-            }}
-          />
+          <GoogleLoginButton /> {/* ✅ COMPONENTE GOOGLE */}
         </div>
-
 
         <p className="mt-4 text-light">
           Non sei registrato?
@@ -108,7 +80,6 @@ function LoginPage() {
         <p className="mt-2">
           <Link to="/forgot-password" className="text-warning">Hai dimenticato la password?</Link>
         </p>
-
       </Form>
     </Container>
   );

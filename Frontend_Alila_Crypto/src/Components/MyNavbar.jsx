@@ -7,7 +7,7 @@ import { useAuth } from "../context/AuthContext"; // <== IMPORTA
 export function MyNavbar() {
   
   const { user } = useAuth();
-  const loggedIn = !!user;    // check login
+  const loggedIn = Boolean(user?.level);
 
   return (
     <Navbar key="lg" expand="lg" bg="dark" variant="dark" sticky="top" className="py-3">
@@ -77,7 +77,14 @@ export function MyNavbar() {
                 {!loggedIn ? (
                   <Nav.Link as={Link} to="/login" className="btn btn-outline-light">Accedi</Nav.Link>
                 ) : (
-                  <Nav.Link as={Link} to="/profilo" className="btn btn-outline-light">Profilo</Nav.Link>
+                  <>
+                    <Nav.Link as={Link} to={`/dashboard/${user.level.toLowerCase()}`} className="text-white">
+                      Dashboard
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/profilo" className="btn btn-outline-light">
+                      Profilo
+                    </Nav.Link>
+                  </>
                 )}
               </div>
 
@@ -94,8 +101,14 @@ export function MyNavbar() {
                 {!loggedIn ? (
                   <Nav.Link as={Link} to="/login" className="btn btn-outline-light mt-3">Accedi</Nav.Link>
                 ) : (
-                  <Nav.Link as={Link} to="/profilo" 
-                     className="btn btn-outline-light mt-3">Profilo</Nav.Link>
+                  <>
+                    <Nav.Link as={Link} to={`/dashboard/${user.level.toLowerCase()}`} className="text-white">
+                      Dashboard
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/profilo" className="btn btn-outline-light">
+                      Profilo
+                    </Nav.Link>
+                  </>
                 )}
               </div>
             </Nav>

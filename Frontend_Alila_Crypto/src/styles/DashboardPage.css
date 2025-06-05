@@ -1,0 +1,17 @@
+/* Sidebar item (voce selezionabile) */
+.sidebar-item {
+  padding: 1.2rem 1.2rem;
+  cursor: pointer;
+  color: #ccc;
+  border-radius: 0.8rem;
+  transition: background 0.2s ease-in-out;
+}
+
+/* Hover o elemento attivo */
+.sidebar-item:hover,
+.sidebar-item.active {
+  background-color: #222;
+  color: #fff;
+}
+
+
