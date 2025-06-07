@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.9.0...v1.10.0) (2025-06-07)
+
+
+### Features
+
+* aggiunta backend di lessons, post e comments con la gestione di isAdmin ([425670f](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/425670f8cd1519bfb0f3b89f8b9afc18d3b4f37f))
+
 ## [1.9.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.8.2...v1.9.0) (2025-06-05)
 
 
