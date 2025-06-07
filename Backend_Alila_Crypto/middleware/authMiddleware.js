@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-// ✅ Verifica presenza e validità del token
+// ✅ Verifica la presenza e validità del token
 export const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
 

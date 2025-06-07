@@ -31,6 +31,20 @@ const communityStorage = new CloudinaryStorage({
   }
 });
 
+// 3. Storage per Lezioni
+const lessonStorage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'lesson_media',
+    resource_type: "auto",
+    public_id: (req, file) => {
+      const timestamp = Date.now();
+      const baseName = path.parse(file.originalname).name.replace(/\s/g, "_");
+      return `lesson_${baseName}_${timestamp}`;
+    }
+  }
+});
+
 // Filtro per Profilo
 const fileFilter = (req, file, cb) => {
   const allowedMimeTypes = [
@@ -56,6 +70,27 @@ const communityFilter = (req, file, cb) => {
   }
 };
 
+// Filtro per lezioni
+export const lessonFilter = (req, file, cb) => {
+  const allowedMimeTypes = [
+    'image/jpeg',
+    'image/png',
+    'application/pdf',
+    'video/mp4',
+    'video/quicktime',
+    'video/x-matroska'
+  ];
+
+  if (allowedMimeTypes.includes(file.mimetype.toLowerCase())) {
+    cb(null, true);
+  } else {
+    cb(
+      new Error('❌ Formato non valido. Sono ammessi jpg, png, mp4, mov, mkv, pdf'),
+      false
+    );
+  }
+};
+
 // Middleware multer per avatar
 export const uploadMulter = multer({
   storage: avatarStorage,
@@ -68,4 +103,11 @@ export const uploadCommunity = multer({
   storage: communityStorage,
   limits: { fileSize: 20 * 1024 * 1024 }, // 20 MB max
   fileFilter: communityFilter
+});
+
+// Middleware multer per Lezioni
+export const uploadLesson = multer({
+  storage: lessonStorage,
+  limits: { fileSize: 25 * 1024 * 1024 },
+  fileFilter: lessonFilter,
 });

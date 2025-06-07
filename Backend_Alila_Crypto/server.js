@@ -6,6 +6,8 @@ import connectDB from "./db.js";
 // Import ROUTERS
 import authRoutes from "./routes/authRoutes.js";
 import protectedRoutes from "./routes/protectedRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import communityRouts from "./routes/communityRoutes.js"
 
 dotenv.config();
 
@@ -14,7 +16,7 @@ const PORT = process.env.SERVER_PORT || 3001;
 
 // Middleware CORS e JSON
 app.use(cors({
-  origin: "http://localhost:5173",  // ✅ frontend
+  origin: "http://localhost:5173",
   credentials: true
 }));
 app.use(express.json());
@@ -26,6 +28,8 @@ connectDB();
 // API
 app.use("/api/auth", authRoutes);
 app.use("/api/protected", protectedRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/community", communityRouts);
 
 // Rotta base di test
 app.get("/", (req, res) => {

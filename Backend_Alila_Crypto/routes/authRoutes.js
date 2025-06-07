@@ -4,7 +4,6 @@ import { verifyToken } from "../middleware/authMiddleware.js";
 import { getProfile, updateProfile } from "../controllers/userController.js";
 import { uploadMulter, uploadCommunity } from "../utils/multer.js";
 import { uploadAvatar } from "../controllers/userController.js";
-import { createPost } from "../controllers/communityController.js";
 import jwt from "jsonwebtoken";
 
 const router = express.Router();
@@ -31,10 +30,6 @@ router.get("/logout", (req, res) => {
 router.get("/profile", verifyToken, getProfile);
 router.put("/profile", verifyToken, updateProfile);
 router.post("/upload-avatar", verifyToken, uploadMulter.single("avatar"), uploadAvatar);
-
-// Community
-router.post("/community-post", verifyToken, uploadCommunity.single("media"), createPost);
-
 
 
 export default router;

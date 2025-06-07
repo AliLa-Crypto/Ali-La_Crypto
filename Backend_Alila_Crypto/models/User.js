@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   xp: { type: Number, default: 0 },
   completedLessons: [{ type: mongoose.Schema.Types.ObjectId, ref: "Lesson" }],
   isAdmin: { type: Boolean, default: false },
+  isBlocked: { type: Boolean, default: false },
   avatarURL: { type: String, default: "" },
   avatarPublicId: { type: String, default: "" },
   socialID: String,
