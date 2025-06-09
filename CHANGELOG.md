@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.10.0...v1.11.0) (2025-06-09)
+
+
+### Features
+
+* aggiunta BackEnd Per inserimento Lezioni e Gestione Community; Lato FrontEnd - Aggiunta  modulo Admin: gestione utenti, Gestione Lezioni, gestione  segnalazioni e statistiche; Creazione Lato user delle card per le lezzioni ([e144bcc](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/e144bcc429cf0c9fb379db966069f10196faf0d0))
+
 ## [1.10.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.9.0...v1.10.0) (2025-06-07)
 
 
