@@ -22,12 +22,8 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const token = localStorage.getItem("accessToken");
-        const res = await api.get(`/auth/profile`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const token = localStorage.getItem("token");
+        const res = await api.get(`/auth/profile`);
 
         setUserData(res.data);
         localStorage.setItem("avatarURL", res.data.avatarURL || "");
@@ -43,15 +39,13 @@ const ProfilePage = () => {
 
   const handleSave = async () => {
     try {
-      const token = localStorage.getItem("accessToken");
-      await api.put(`/auth/profile`, { bio }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const token = localStorage.getItem("token");
+      await api.put(`/auth/profile`, { bio } );
+
       setSuccessMessage("✅ Profilo aggiornato con successo!");
       setUserData(prev => ({ ...prev, bio })); // aggiorna visualizzazione
       setBio(""); // svuota la textarea
+      
       document.getElementById("bio-section")?.scrollIntoView({ behavior: "smooth" });
     } catch (err) {
       setSuccessMessage("❌ Errore durante il salvataggio.");
@@ -66,17 +60,16 @@ const ProfilePage = () => {
     formData.append("avatar", selectedFile);
 
     try {
-      const token = localStorage.getItem("accessToken");
+      const token = localStorage.getItem("token");
       const res = await api.post(`/auth/upload-avatar`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
         },
       });
 
       setUserData(prev => ({ ...prev, avatarURL: res.data.avatarURL }));
       localStorage.setItem("avatarURL", res.data.avatarURL);
-      login(localStorage.getItem("accessToken")); // Ricarica l’utente con avatar aggiornato
+      login(localStorage.getItem("token")); // Ricarica l’utente con avatar aggiornato
 
       setSuccessMessage("✅ Avatar caricato con successo!");
     } catch (err) {
@@ -85,7 +78,7 @@ const ProfilePage = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("token");
     localStorage.removeItem("userLevel");
     logout();           // ✅ cancella token + setta user a null
     navigate("/login"); // 🔁 Porta alla pagina di login
@@ -138,7 +131,9 @@ const ProfilePage = () => {
                 <Button variant="outline-light" onClick={() => navigate("/portfolio")}>📈 Portfolio</Button>
                 <Button variant="outline-light" onClick={() => navigate("/finanza-personale")}>💼 Finanza</Button>
                 {userData.isAdmin && (
-                  <Button variant="outline-warning" onClick={() => navigate("/admin")}>🛠️ Admin</Button>
+                  <Button variant="outline-warning" onClick={() => navigate("/admin/dashboard")}>
+                    🛠️ Admin
+                  </Button>
                 )}
               </div>
             </Col>

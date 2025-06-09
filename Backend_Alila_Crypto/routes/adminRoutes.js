@@ -10,13 +10,13 @@ const router = express.Router();
 
 router.get("/dashboard", verifyToken, checkAdmin, getAdminDashboard);
 
-// UTENTI
+// GESTIONE UTENTI
 router.get("/users", verifyToken, checkAdmin, getAllUsers);
 router.patch("/users/:id/role", verifyToken, checkAdmin, changeUserRole);
 router.patch("/users/:id/block", verifyToken, checkAdmin, toggleBlockUser);
 router.delete("/users/:id", verifyToken, checkAdmin, deleteUser);
 
-// 🔸 Lezioni - accesso riservato admin
+// Lezioni - accesso riservato admin
 router.get("/lessons", verifyToken, checkAdmin, getAllLessons);
 router.post("/lessons", verifyToken, checkAdmin, createLesson);
 router.post("/lessons/upload-media", verifyToken, checkAdmin, uploadLesson.single("file"),
@@ -28,6 +28,10 @@ router.post("/lessons/upload-media", verifyToken, checkAdmin, uploadLesson.singl
       message: "Upload completato con successo",
       mediaUrl: req.file.path,
       publicId: req.file.filename,
+      mediaType: req.file.mimetype.includes("video") ? "video"
+            : req.file.mimetype.includes("image") ? "image"
+            : req.file.mimetype.includes("pdf") ? "pdf"
+            : ""
     });
   }
 );

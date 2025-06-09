@@ -10,7 +10,13 @@ import SelectLevelPage from './pages/SelectLevelPage';
 import WelcomePage from "./pages/WelcomePage";
 import DashboardPage from "./pages/DashboardPage";
 import RedirectToUserDashboard from "./pages/RedirectToUserDashboard";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import LessonManager from './Components/Admin/LessonManager';
+import ProtectedRouteAdmin from "./Components/Admin/ProtectedRouteAdmin";
+import Unauthorized from "./pages/Unauthorized";
 import ProfilePage from "./pages/ProfilePage";
+import LearnPage from './pages/Users/LearnPage';
+import LessonDetailPage from './pages/Users/LessonDetailPage';
 import Footer from "./Components/Footer";
 
 function App() {
@@ -28,7 +34,17 @@ function App() {
           <Route path="/welcome/:level" element={<WelcomePage />} />
           <Route path="/dashboard/:level" element={<DashboardPage />} />
           <Route path="/dashboard" element={<RedirectToUserDashboard />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="/admin/dashboard/*"  element={
+            <ProtectedRouteAdmin>
+              <AdminDashboard />
+            </ProtectedRouteAdmin>
+          } />
+          <Route path="/lessons/*" element={<LessonManager />} />
           <Route path="/profilo" element={<ProfilePage />} />
+          <Route path="/learn" element={<LearnPage />} />
+          <Route path="/lessons/:id" element={<LessonDetailPage />} />
+
         </Routes>
       </div>
       <Footer />

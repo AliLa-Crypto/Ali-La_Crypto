@@ -253,7 +253,10 @@ export const loginWithGooglePopup = async (req, res) => {
     }
 
     const jwtToken = jwt.sign(
-      { userId: user._id, level: user.level, isAdmin: user.isAdmin },
+      { userId: user._id, 
+        level: user.level, 
+        email: user.email,
+        isAdmin: user.isAdmin },
       process.env.JWT_SECRET,
       { expiresIn: "3d" }
     );

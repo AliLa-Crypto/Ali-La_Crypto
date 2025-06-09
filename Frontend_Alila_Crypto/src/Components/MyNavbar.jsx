@@ -1,6 +1,5 @@
 import { Navbar, Nav, Container, NavDropdown, Offcanvas } from 'react-bootstrap';
 import logo from '../assets/logo3.png';
-import { isUserLoggedIn } from '../utils/auth';
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"; // <== IMPORTA
 

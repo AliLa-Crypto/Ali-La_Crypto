@@ -12,13 +12,19 @@ export const getAllLessons = async (req, res) => {
 
 // POST nuova lezione
 export const createLesson = async (req, res) => {
-  const { title, level, type, content, mediaUrl } = req.body;
+  const { title, description, level, category, type, content, mediaUrl, mediaType, publicId
+  } = req.body;
+
   try {
-    const newLesson = new Lesson({ title, level, type, content, mediaUrl });
+    const newLesson = new Lesson({
+      title, description, level, category, type, content, mediaUrl, mediaType, publicId
+    });
+
     await newLesson.save();
     res.status(201).json({ message: "Lezione creata con successo", lesson: newLesson });
   } catch (err) {
-    res.status(500).json({ message: "Errore nella creazione lezione" });
+    console.error("Errore nella creazione lezione:", err);
+    res.status(500).json({ message: "Errore nella creazione della lezione" });
   }
 };
 
@@ -41,5 +47,21 @@ export const deleteLesson = async (req, res) => {
     res.status(200).json({ message: "Lezione eliminata" });
   } catch (err) {
     res.status(500).json({ message: "Errore nell’eliminazione" });
+  }
+};
+
+// ✅ Lezioni filtrate per livello utente (visibili nella Dashboard)
+export const getLessonsForUser = async (req, res) => {
+  try {
+    const user = req.user; // Decodificato dal token JWT dal middleware
+    if (!user || !user.level) {
+      return res.status(401).json({ message: "Accesso non autorizzato" });
+    }
+
+    const lessons = await Lesson.find({ level: user.level });
+    res.status(200).json(lessons);
+  } catch (err) {
+    console.error("Errore nel recupero lezioni:", err);
+    res.status(500).json({ message: "Errore nel recupero lezioni" });
   }
 };

@@ -10,7 +10,6 @@ const Sidebar = ({ selected, onSelect }) => {
     { key: "finance", label: "💼 Finanza Personale" },
     { key: "trading", label: "📉 Trading & Mercato" },
     { key: "settings", label: "🌓 Tema & Stato" },
-    { key: "admin", label: "🧾 Admin Panel" },
   ];
 
   return (

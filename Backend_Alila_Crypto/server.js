@@ -7,7 +7,9 @@ import connectDB from "./db.js";
 import authRoutes from "./routes/authRoutes.js";
 import protectedRoutes from "./routes/protectedRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
-import communityRouts from "./routes/communityRoutes.js"
+import communityRouts from "./routes/communityRoutes.js";
+import lessonRoutes from "./routes/lessonRoutes.js";
+
 
 dotenv.config();
 
@@ -30,6 +32,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/protected", protectedRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/community", communityRouts);
+app.use("/api/lessons", lessonRoutes);
 
 // Rotta base di test
 app.get("/", (req, res) => {

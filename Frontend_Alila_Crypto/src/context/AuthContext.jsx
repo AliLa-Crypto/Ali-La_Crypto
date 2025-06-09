@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); // oggetto utente o null
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
+    const token = localStorage.getItem("token");
     if (token) {
       try {
         const decoded = jwtDecode(token);
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
       } catch (err) {
         console.error("Token non valido", err);
-        localStorage.removeItem("accessToken");
+        localStorage.removeItem("token");
         localStorage.removeItem("userLevel");
         setUser(null);
       }
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
   const login = (token) => {
     try {
       const decoded = jwtDecode(token);
-      localStorage.setItem("accessToken", token);
+      localStorage.setItem("token", token);
       localStorage.setItem("userLevel", decoded.level.toLowerCase());
       const storedAvatar = localStorage.getItem("avatarURL") || "";
 
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("token");
     localStorage.removeItem("userLevel");
     setUser(null);
   };

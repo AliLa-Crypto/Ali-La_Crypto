@@ -35,12 +35,24 @@ export const getAllUsers = async (req, res) => {
 
 // Cambia il ruolo utente (admin/user)
 export const changeUserRole = async (req, res) => {
-  const { id } = req.params;
-  const { isAdmin } = req.body;
+  const { level } = req.body;
+  const isAdmin = level === "admin";
+
   try {
-    const user = await User.findByIdAndUpdate(id, { isAdmin }, { new: true });
-    res.status(200).json({ message: `Ruolo aggiornato`, user });
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        isAdmin: isAdmin,
+        level: isAdmin ? "Principiante" : level // fallback sicuro
+      },
+      { new: true }
+    );
+
+    console.log("▶️ Cambio ruolo utente:", req.params.id, "→", level);
+
+    res.status(200).json({ message: "Ruolo aggiornato", user: updatedUser });
   } catch (err) {
+    console.error("❌ Errore aggiornamento ruolo:", err);
     res.status(500).json({ message: "Errore aggiornamento ruolo" });
   }
 };

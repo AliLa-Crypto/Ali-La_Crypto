@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Row, Col, Alert } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Sidebar from "@/components/Dashboard/Sidebar";
+import LearnPage from "@/pages/Users/LearnPage"
 import api from "@/utils/api";
 import "@/styles/DashboardPage.css";
 
@@ -26,7 +27,7 @@ const DashboardPage = () => {
   useEffect(() => {
     const testAccess = async () => {
       try {
-        const token = localStorage.getItem("accessToken");
+        const token = localStorage.getItem("token");
         if (!token) {
           setAccessMessage("Token mancante. Effettua il login.");
           return;
@@ -39,11 +40,7 @@ const DashboardPage = () => {
             ? "/intermedio"
             : "/principiante";
 
-        const res = await api.get(`/protected${endpoint}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await api.get(`/protected${endpoint}`);
 
         setAccessMessage(res.data.message);
       } catch (err) {
@@ -57,7 +54,7 @@ const DashboardPage = () => {
   const renderContent = () => {
     switch (selectedModule) {
       case "learn":
-        return <p>📚 Sezione Educazione – Prossimamente!</p>;
+        return <LearnPage />;
       case "forum":
         return <p>💬 Forum community – Prossimamente!</p>;
       case "portfolio":
