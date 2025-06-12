@@ -5,6 +5,10 @@
   color: #ccc;
   border-radius: 0.8rem;
   transition: background 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1rem;
 }
 
 /* Hover o elemento attivo */
@@ -12,6 +16,31 @@
 .sidebar-item.active {
   background-color: #222;
   color: #fff;
+  font-weight: bold;
 }
 
+/* Sidebar a scomparsa per mobile */
+.mobile-sidebar {
+  position: fixed;
+  top: 4.5rem;
+  left: 0;
+  width: 70%;
+  height: 100vh;
+  background-color: #000;
+  padding: 1rem;
+  z-index: 1050;
+  overflow-y: auto;
+  border-right: 1px solid #333;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
+}
 
+/* Contenuto accanto alla sidebar mobile */
+.mobile-content {
+  margin-top: 1.5rem;
+  padding: 1rem;
+}
+
+/* Disattivato il bottone toggle ora rimosso */
+.sidebar-toggle {
+  display: none;
+}

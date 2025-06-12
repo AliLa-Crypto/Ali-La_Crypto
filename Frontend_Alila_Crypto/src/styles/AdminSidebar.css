@@ -1,15 +1,17 @@
-.sidebar-admin {
-  background-color: #111;
+.admin-sidebar {
   color: white;
-  min-height: 100vh;
-  padding: 1rem;
+  height: 100% !important;
+  padding: 1rem !important;
+  position: sticky !important;
+  
+
 }
 
-.sidebar-admin h4 {
+.admin-sidebar h4 {
   margin-bottom: 1rem;
 }
 
-.sidebar-admin .nav-link {
+.admin-sidebar .nav-link {
   color: white;
   padding: 0.5rem 0;
   display: block;
@@ -17,8 +19,8 @@
   transition: 0.3s;
 }
 
-.sidebar-admin .nav-link:hover,
-.sidebar-admin .nav-link.active {
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.active {
   color: #0dcaf0;
   font-weight: bold;
 }

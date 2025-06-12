@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import Sidebar from "@/components/Dashboard/Sidebar";
-import LearnPage from "@/pages/Users/LearnPage"
+import LearnPage from "@/pages/Users/LearnPage";
 import api from "@/utils/api";
 import "@/styles/DashboardPage.css";
 
@@ -41,7 +41,6 @@ const DashboardPage = () => {
             : "/principiante";
 
         const res = await api.get(`/protected${endpoint}`);
-
         setAccessMessage(res.data.message);
       } catch (err) {
         setAccessMessage(err.response?.data?.message || "Errore nell'accesso.");
@@ -80,20 +79,29 @@ const DashboardPage = () => {
   };
 
   return (
-    <Container fluid className="pt-3 text-light">
-      <Row className="gx-0">
-        {/* Sidebar - occupa 3 colonne su md+, intera larghezza su xs */}
-        <Col xs={12} md={3} lg={2} className="bg-black p-3 border-end border-secondary">
-          <Sidebar onSelect={setSelectedModule} selected={selectedModule} />
-        </Col>
+    <>
+      {/* ✅ Layout LG+ (fisso) */}
+      <Container fluid className="pt-3 text-light d-none d-lg-block">
+        <Row className="gx-0">
+          <Col xs={12} md={3} lg={2} className="bg-black p-3 border-end border-secondary">
+            <Sidebar onSelect={setSelectedModule} selected={selectedModule} />
+          </Col>
+          <Col xs={12} md={9} lg={10} className="p-4">
+            <h3 className="mb-3">Livello: {userLevel}</h3>
+            {renderContent()}
+          </Col>
+        </Row>
+      </Container>
 
-        {/* Contenuto principale - occupa il resto */}
-        <Col xs={12} md={9} lg={10} className="p-4">
-          <h3 className="mb-3">Dashboard – Livello: {userLevel}</h3>
+      {/* ✅ Layout SM/MD (mobile) */}
+      <div className="d-block d-lg-none p-4 text-light">
+        <Sidebar onSelect={setSelectedModule} selected={selectedModule} />
+        <div className="mt-4">
+          <h3 className="mb-3">Livello: {userLevel}</h3>
           {renderContent()}
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -1,22 +1,50 @@
 import User from "../models/User.js";
 import Post from "../models/Post.js";
 import Lesson from "../models/Lesson.js";
+import Comment from "../models/Comment.js";
 
 // Per dashboard Admin
 export const getAdminDashboard = async (req, res) => {
   try {
-    const userCount = await User.countDocuments();
-    const lessonCount = await Lesson.countDocuments();
-    const flaggedPosts = await Post.countDocuments({ flagged: true });
+    // 1. Recupero dati da MongoDB
+    const users = await User.find();
+    const lessons = await Lesson.find();
+    const flaggedPosts = await Post.find({ flagged: true });
+    const flaggedComments = await Comment.find({ flagged: true });
 
+    // 2. Conteggio utenti per livello
+    const utentiPerLivello = {
+      principiante: users.filter(u => u.level?.toLowerCase() === "principiante").length,
+      intermedio: users.filter(u => u.level?.toLowerCase() === "intermedio").length,
+      pro: users.filter(u => u.level?.toLowerCase() === "pro").length,
+    };
+
+    // 3. Conteggio lezioni per categoria (dinamico)
+    const lezioniPerCategoria = {};
+    lessons.forEach(l => {
+      const cat = l.category?.trim() || "Senza categoria";
+      lezioniPerCategoria[cat] = (lezioniPerCategoria[cat] || 0) + 1;
+    });
+
+    // 4. Conteggio contenuti segnalati
+    const segnalazioni = {
+      post: flaggedPosts.length,
+      commenti: flaggedComments.length,
+    };
+
+    // 5. Risposta JSON completa
     res.status(200).json({
       message: "🔐 Area Admin - Accesso autorizzato",
       stats: {
-        utenti: userCount,
-        lezioni: lessonCount,
-        postSegnalati: flaggedPosts
+        utenti: users.length,
+        lezioni: lessons.length,
+        postSegnalati: flaggedPosts.length,
+        utentiPerLivello,
+        lezioniPerCategoria,
+        segnalazioni,
       }
     });
+
   } catch (err) {
     console.error("❌ Errore Admin Dashboard:", err);
     res.status(500).json({ message: "Errore nel caricamento dati admin" });

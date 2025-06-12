@@ -220,7 +220,7 @@ export const resetPassword = async (req, res) => {
 // Autenticazione con Google Popup
 export const loginWithGooglePopup = async (req, res) => {
   try {
-    const { token } = req.body;
+    const { token, level } = req.body; // Passo sia il token che il livello
 
     const ticket = await client.verifyIdToken({
       idToken: token,
@@ -246,7 +246,7 @@ export const loginWithGooglePopup = async (req, res) => {
         username: uniqueUsername,
         email: payload.email,
         socialID: payload.sub,
-        level: "principiante",
+        level: level || "principiante", // Prende il livello se presente
       });
 
       isNewUser = true;

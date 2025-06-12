@@ -1,71 +1,133 @@
+/* 🌟 Contenitore principale del profilo */
 .profile-card {
-  background-color: #1a1a2e !important; /* dark bluish */
-  color: #ffffff !important;
+  background-color: #1e1e2f !important;
   border-radius: 20px;
-  border: none;
+  color: #f1f1f1 !important;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 🖼️ Avatar */
+.avatar-container {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 1.5rem;
+  cursor: pointer;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .profile-avatar {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  cursor: pointer;
+  border: 3px solid #5eead4;
   transition: transform 0.3s ease;
-  border: 3px solid #4ecca3;
 }
 
 .profile-avatar:hover {
   transform: scale(1.05);
-  border-color: #00adb5;
 }
 
-button,
-.form-control {
-  border-radius: 12px !important;
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #222;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #aaa;
 }
 
-textarea.form-control {
-  background-color: #222644;
-  color: white;
+.avatar-icon {
+  font-size: 2.2rem;
+  position: absolute;
+  color: #fff;
+}
+
+.avatar-icon.edit {
+  bottom: 10px;
+  right: 10px;
+  background-color: #00000088;
+  border-radius: 50%;
+  padding: 0.4rem;
+}
+
+.avatar-icon.add {
+  font-size: 3rem;
+  color: #aaa;
+}
+
+/* 📄 Bio */
+.profile-bio {
+  background-color: #2d2d44;
   border: 1px solid #444;
+  color: #eee;
+  resize: none;
 }
 
-textarea.profile-bio {
-  background-color: #222644 !important;
-  color: white !important;
-  border: 1px solid #444 !important;
-}
-
-button.btn-outline-light:hover {
-  background-color: #4ecca3;
-  color: black;
-}
-
-h2,
-h4,
-h5 {
-  color: #4ecca3;
-}
-
-.alert-success {
-  background-color: #215c42;
-  color: #d4f5e0;
-  border: none;
-}
-
-.alert-danger {
-  background-color: #4a1a1a;
-  color: #ffcfcf;
-  border: none;
-}
-
+/* 📱 Responsive layout per mobile */
 @media (max-width: 768px) {
   .profile-card {
     flex-direction: column !important;
+    padding: 2rem 1.2rem;
   }
 
-  .profile-avatar {
-    margin-bottom: 20px;
+  .avatar-container {
+    width: 120px;
+    height: 120px;
+  }
+
+  .avatar-icon.edit {
+    bottom: 5px;
+    right: 5px;
+    font-size: 1.6rem;
+  }
+
+  .avatar-icon.add {
+    font-size: 2.2rem;
+  }
+
+  .profile-avatar:hover {
+    transform: none;
+  }
+
+  .profile-bio {
+    font-size: 0.95rem;
+  }
+
+  .profile-card h2,
+  .profile-card h4 {
+    text-align: center;
+  }
+
+  .profile-card .btn {
+    font-size: 0.9rem;
+  }
+
+  .profile-card .d-flex.flex-column.gap-2 {
+    align-items: center;
+  }
+}
+
+/* 📲 Tablet ottimizzazione */
+@media (min-width: 769px) and (max-width: 991px) {
+  .avatar-container {
+    width: 140px;
+    height: 140px;
+  }
+
+  .profile-card {
+    padding: 2rem 2rem;
+  }
+
+  .profile-bio {
+    font-size: 1rem;
   }
 }

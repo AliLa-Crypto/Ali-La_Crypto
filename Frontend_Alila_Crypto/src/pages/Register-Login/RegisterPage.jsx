@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Form, Button, InputGroup, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -6,15 +6,22 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import api from "@/utils/api";
 import "@/styles/RegisterPage.css";
-import { GoogleLogin } from '@react-oauth/google';
-import { useAuth } from "../../context/AuthContext"; // <== IMPORTA
-
+import { GoogleLogin } from "@react-oauth/google";
+import { useAuth } from "../../context/AuthContext";
 
 function RegisterPage() {
-  const { level } = useParams();
+  const { level } = useParams(); // es. 'principiante', 'intermedio', 'pro'
   const navigate = useNavigate();
   const { login } = useAuth();
   const [serverError, setServerError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  // ✅ Salva il livello scelto in localStorage (serve per Google)
+  useEffect(() => {
+    if (level) {
+      localStorage.setItem("level", level.toLowerCase());
+    }
+  }, [level]);
 
   const formattedLevel =
     level === "principiante"
@@ -24,8 +31,6 @@ function RegisterPage() {
       : level === "pro"
       ? "Pro"
       : "";
-
-  const [showPassword, setShowPassword] = useState(false);
 
   const schema = Yup.object().shape({
     username: Yup.string().required("Username obbligatorio"),
@@ -45,7 +50,7 @@ function RegisterPage() {
 
   const onSubmit = async (data) => {
     try {
-      setServerError(""); // reset errori precedenti
+      setServerError("");
       const response = await api.post(`/auth/register`, {
         username: data.username,
         email: data.email,
@@ -55,11 +60,11 @@ function RegisterPage() {
 
       if (response.status === 201) {
         const token = response.data.token;
-        if (token) login(token); // <== aggiorna il context
+        if (token) login(token);
         navigate(`/welcome/${level}`);
       }
     } catch (err) {
-      if (err.response && err.response.data && err.response.data.message) {
+      if (err.response?.data?.message) {
         setServerError(err.response.data.message);
       } else {
         setServerError("Errore nella registrazione. Riprova.");
@@ -70,24 +75,33 @@ function RegisterPage() {
   return (
     <Container className="py-5 text-light">
       <h2 className="mb-4">Registrazione</h2>
+
       <Form onSubmit={handleSubmit(onSubmit)} className="bg-dark p-4 rounded shadow">
         {serverError && <Alert variant="danger">{serverError}</Alert>}
 
         {level && (
           <p className="mb-3">
-            Livello selezionato: <strong>{level}</strong>
+            Livello selezionato: <strong>{formattedLevel}</strong>
           </p>
         )}
 
         <Form.Group className="mb-3">
           <Form.Label>Username</Form.Label>
-          <Form.Control type="text" placeholder="Inserisci il tuo username" {...register("username")} />
+          <Form.Control
+            type="text"
+            placeholder="Inserisci il tuo username"
+            {...register("username")}
+          />
           <p className="text-danger small">{errors.username?.message}</p>
         </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Inserisci la tua email" {...register("email")} />
+          <Form.Control
+            type="email"
+            placeholder="Inserisci la tua email"
+            {...register("email")}
+          />
           <p className="text-danger small">{errors.email?.message}</p>
         </Form.Group>
 
@@ -140,6 +154,7 @@ function RegisterPage() {
         <GoogleLogin
           onSuccess={async (credentialResponse) => {
             const googleToken = credentialResponse.credential;
+            const levelFromStorage = localStorage.getItem("level") || "principiante";
 
             if (!googleToken) {
               alert("Token Google mancante");
@@ -149,11 +164,11 @@ function RegisterPage() {
             try {
               const response = await api.post(`/auth/google-popup`, {
                 token: googleToken,
+                level: levelFromStorage,
               });
 
               const { token, user, isNewUser } = response.data;
-
-              login(token); // <-- aggiorna lo stato globale e localStorage
+              login(token);
 
               if (isNewUser) {
                 navigate(`/welcome/${user.level.toLowerCase()}`);
@@ -169,9 +184,7 @@ function RegisterPage() {
             alert("Errore Google Login");
           }}
         />
-
       </div>
-
     </Container>
   );
 }

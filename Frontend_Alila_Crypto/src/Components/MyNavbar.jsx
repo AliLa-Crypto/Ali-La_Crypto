@@ -10,9 +10,9 @@ export function MyNavbar() {
 
   return (
     <Navbar key="lg" expand="lg" bg="dark" variant="dark" sticky="top" className="py-3">
-      <Container>
+      <Container fluid>
         {/* 🔹 Logo + titolo */}
-        <Navbar.Brand href="/" className="d-flex align-items-center">
+        <Navbar.Brand href="/" className="d-flex align-items-center mx-5">
           <img
             src={logo}
             alt="Ali&La Crypto logo"
@@ -28,7 +28,7 @@ export function MyNavbar() {
           <Nav className="d-flex flex-row align-items-center">
             <Nav.Link className='text-white me-3' as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/about" className="text-white me-4">Chi siamo</Nav.Link>
-            <NavDropdown title="Tool" id="tool-dropdown-sm" menuVariant="dark" 
+            <NavDropdown title="Strumenti" id="tool-dropdown-sm" menuVariant="dark" 
                          className="me-4 dropdown-absolute">
               <NavDropdown.Item as={Link} to="/exchange">Exchange</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/wallet">Wallet</NavDropdown.Item>
@@ -58,7 +58,7 @@ export function MyNavbar() {
               <div className="d-none d-lg-flex w-100 justify-content-end align-items-center gap-2">
                 <Nav.Link className='text-white me-3' as={Link} to="/">Home</Nav.Link>
                 <Nav.Link as={Link} to="/about">Chi siamo</Nav.Link>
-                <NavDropdown title="Tool" id="tool-dropdown-lg">
+                <NavDropdown title="Strumenti" id="tool-dropdown-lg">
                   <NavDropdown.Item as={Link} to="/exchange">Exchange</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/wallet">Wallet</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/market">Analisi Mercato</NavDropdown.Item>
@@ -78,7 +78,7 @@ export function MyNavbar() {
                 ) : (
                   <>
                     <Nav.Link as={Link} to={`/dashboard/${user.level.toLowerCase()}`} className="text-white">
-                      Dashboard
+                      Area Personale
                     </Nav.Link>
                     <Nav.Link as={Link} to="/profilo" className="btn btn-outline-light">
                       Profilo
@@ -98,11 +98,11 @@ export function MyNavbar() {
                 <Nav.Link as={Link} to="/carrello">Carrello</Nav.Link>
 
                 {!loggedIn ? (
-                  <Nav.Link as={Link} to="/login" className="btn btn-outline-light mt-3">Accedi</Nav.Link>
+                  <Nav.Link as={Link} to="/login" className="btn btn-outline-light mt-3 pe-4">Accedi</Nav.Link>
                 ) : (
                   <>
                     <Nav.Link as={Link} to={`/dashboard/${user.level.toLowerCase()}`} className="text-white">
-                      Dashboard
+                      Area Personale
                     </Nav.Link>
                     <Nav.Link as={Link} to="/profilo" className="btn btn-outline-light">
                       Profilo

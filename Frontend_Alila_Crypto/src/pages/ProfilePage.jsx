@@ -5,26 +5,24 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import AvatarModal from "@/components/Profile/AvatarModal";
 import "@/styles/ProfilePage.css";
+import { FaPlusCircle, FaPen } from "react-icons/fa";
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState({
-  avatarURL: localStorage.getItem("avatarURL") || "",
+    avatarURL: localStorage.getItem("avatarURL") || "",
   });
 
   const [bio, setBio] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const { login } = useAuth();
-  const { logout } = useAuth();
+  const { login, logout } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const token = localStorage.getItem("token");
         const res = await api.get(`/auth/profile`);
-
         setUserData(res.data);
         localStorage.setItem("avatarURL", res.data.avatarURL || "");
         setBio(res.data.bio || "");
@@ -39,20 +37,16 @@ const ProfilePage = () => {
 
   const handleSave = async () => {
     try {
-      const token = localStorage.getItem("token");
-      await api.put(`/auth/profile`, { bio } );
-
+      await api.put(`/auth/profile`, { bio });
       setSuccessMessage("✅ Profilo aggiornato con successo!");
-      setUserData(prev => ({ ...prev, bio })); // aggiorna visualizzazione
-      setBio(""); // svuota la textarea
-      
+      setUserData(prev => ({ ...prev, bio }));
+      setBio("");
       document.getElementById("bio-section")?.scrollIntoView({ behavior: "smooth" });
     } catch (err) {
       setSuccessMessage("❌ Errore durante il salvataggio.");
     }
   };
 
-  // Upload file Profilo
   const handleUpload = async () => {
     if (!selectedFile) return alert("Nessun file selezionato");
 
@@ -60,7 +54,6 @@ const ProfilePage = () => {
     formData.append("avatar", selectedFile);
 
     try {
-      const token = localStorage.getItem("token");
       const res = await api.post(`/auth/upload-avatar`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -69,8 +62,7 @@ const ProfilePage = () => {
 
       setUserData(prev => ({ ...prev, avatarURL: res.data.avatarURL }));
       localStorage.setItem("avatarURL", res.data.avatarURL);
-      login(localStorage.getItem("token")); // Ricarica l’utente con avatar aggiornato
-
+      login(localStorage.getItem("token"));
       setSuccessMessage("✅ Avatar caricato con successo!");
     } catch (err) {
       setSuccessMessage("❌ Errore durante l'upload dell'immagine.");
@@ -80,11 +72,9 @@ const ProfilePage = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userLevel");
-    logout();           // ✅ cancella token + setta user a null
-    navigate("/login"); // 🔁 Porta alla pagina di login
+    logout();
+    navigate("/login");
   };
-
-  const goToDashboard = () => navigate("/dashboard");
 
   if (!userData) return <p className="text-light p-5">Caricamento...</p>;
 
@@ -92,36 +82,48 @@ const ProfilePage = () => {
     <Container fluid className="py-5">
       <Row className="justify-content-center">
         <Col xs={12} md={10}>
-          <Card className="profile-card shadow-lg p-4 d-flex flex-row flex-wrap">
+          <Card className="profile-card shadow-lg p-4 d-flex flex-column flex-md-row">
             {/* Sidebar sinistra */}
             <Col md={4} className="border-end mb-4 mb-md-0 text-center">
-              <h4 className="mb-3">👤 Il tuo profilo</h4>
-              {userData.avatarURL && userData.avatarURL !== "" && (
-                <>
-                  <img
-                    src={userData.avatarURL}
-                    alt="Avatar"
-                    className="profile-avatar mb-3"
-                    onClick={() => setShowModal(true)}
-                  />
-                  <AvatarModal
-                    show={showModal}
-                    handleClose={() => setShowModal(false)}
-                    avatarURL={userData.avatarURL}
-                  />
-                </>
-              )}
+              <h4 className="mb-3">👤 {userData.username}</h4>
 
-              <Form.Group controlId="formFile" className="mb-3">
-                <Form.Control
-                  type="file"
-                  accept=".jpg,.jpeg,.png,.heic"
-                  onChange={(e) => setSelectedFile(e.target.files[0])}
-                />
-              </Form.Group>
-              <Button variant="primary" className="mb-4 w-100" onClick={handleUpload}>
-                📤 Carica nuova foto
-              </Button>
+              <div className="avatar-container" onClick={() => document.getElementById("avatarInput").click()}>
+                {userData.avatarURL ? (
+                  <div className="avatar-wrapper">
+                    <img
+                      src={userData.avatarURL}
+                      alt="Avatar"
+                      className="profile-avatar"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowModal(true);
+                      }}
+                    />
+                    <FaPen className="avatar-icon edit" />
+                  </div>
+                ) : (
+                  <div className="avatar-placeholder">
+                    <FaPlusCircle className="avatar-icon add" />
+                  </div>
+                )}
+              </div>
+
+              <AvatarModal
+                show={showModal}
+                handleClose={() => setShowModal(false)}
+                avatarURL={userData.avatarURL}
+              />
+
+              <input
+                id="avatarInput"
+                type="file"
+                accept=".jpg,.jpeg,.png,.heic"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  setSelectedFile(e.target.files[0]);
+                  handleUpload();
+                }}
+              />
 
               <h5 className="mt-4">🔗 Moduli rapidi</h5>
               <div className="d-flex flex-column gap-2">
@@ -138,15 +140,14 @@ const ProfilePage = () => {
               </div>
             </Col>
 
-            {/* Sezione destra: dati profilo */}
+            {/* Sezione destra */}
             <Col md={8} className="ps-md-4">
               <h2 className="mb-4">👩‍💻 Informazioni utente</h2>
-
               <p><strong>Username:</strong> {userData.username}</p>
               <p><strong>Email:</strong> {userData.email}</p>
               <p><strong>Livello:</strong> {userData.level}</p>
               <p><strong>XP:</strong> {userData.xp}</p>
-              
+
               <div id="bio-section">
                 <Form.Group className="my-4">
                   <Form.Label>📝 Bio</Form.Label>
@@ -167,7 +168,6 @@ const ProfilePage = () => {
                   {userData.bio}
                 </div>
               )}
-
 
               {successMessage && (
                 <Alert variant={successMessage.startsWith("✅") ? "success" : "danger"}>

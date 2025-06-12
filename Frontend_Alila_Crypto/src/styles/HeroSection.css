@@ -1,11 +1,16 @@
 .hero-section {
   min-height: 50vh !important;
   display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 1rem;
   align-items: center;
 }
 
 .hero-img {
   height: auto;
+  max-width: 100%;
+  margin-bottom: 1rem;
   animation: float 3s ease-in-out infinite;
 }
 

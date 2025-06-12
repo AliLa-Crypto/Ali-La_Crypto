@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Container, Spinner, Alert, Button } from "react-bootstrap";
+import { Container, Spinner, Alert, Button, Badge } from "react-bootstrap";
+import { motion } from "framer-motion";
 import api from "@/utils/api";
 import { getUserFromToken } from "@/utils/auth";
 import "@/styles/LessonDetailPage.css";
+
+// ✅ Import immagini locali
+import nft1 from "@/assets/backgrounds/nft1.webp";
+// import nft2 from "@/assets/backgrounds/nft2.png";
+// import fallback from "@/assets/backgrounds/Logo1.png"; // immagine generica
 
 const LessonDetailPage = () => {
   const { id } = useParams();
@@ -20,8 +26,7 @@ const LessonDetailPage = () => {
         const res = await api.get(`/lessons/${id}`);
         const fetchedLesson = res.data;
 
-        // Verifica se il livello dell'utente è autorizzato
-        if (!user || user.level !== fetchedLesson.level) {
+        if (!user || user.level.toLowerCase() !== fetchedLesson.level.toLowerCase()) {
           setErrorMsg("⛔ Non sei autorizzato a visualizzare questa lezione.");
           return;
         }
@@ -37,53 +42,93 @@ const LessonDetailPage = () => {
     fetchLesson();
   }, [id, user]);
 
+  const handleBack = () => {
+    navigate("/learn");
+  };
+
   if (loading) return <Spinner animation="border" className="m-5" />;
 
-  if (errorMsg) return (
-    <Container className="text-light mt-5">
-      <Alert variant="danger">{errorMsg}</Alert>
-      <Button variant="secondary" onClick={() => navigate("/dashboard/" + user.level)}>⬅️ Torna alle lezioni</Button>
-    </Container>
-  );
+  if (errorMsg) {
+    return (
+      <Container className="text-light mt-5">
+        <Alert variant="danger">{errorMsg}</Alert>
+        <Button variant="secondary" onClick={handleBack}>
+          ⬅️ Torna alle lezioni
+        </Button>
+      </Container>
+    );
+  }
+
+  // ✅ Assegna immagine in base alla categoria
+  let imageUrl = "https://source.unsplash.com/1600x400/?technology,digital";
+  if (lesson.category === "NFT") imageUrl = nft1;
+  // else if (lesson.category === "Criptovalute") imageUrl = nft2;
+  // else if (lesson.category === "Blockchain") imageUrl = "https://source.unsplash.com/1600x400/?blockchain,technology";
+  // else if (lesson.category === "Finanza") imageUrl = "https://source.unsplash.com/1600x400/?finance,economy";
 
   return (
-    <Container className="text-light mt-4">
-      <h2 className="mb-3">{lesson.title}</h2>
-      <p><strong>Descrizione:</strong> {lesson.description}</p>
-      <p><strong>Livello:</strong> {lesson.level}</p>
-      <p><strong>Categoria:</strong> {lesson.category}</p>
-      <p><strong>Tipo:</strong> {lesson.type}</p>
+    <Container className="lesson-detail-container px-5 py-4 text-light lead">
+      {/* ✅ Copertina dinamica */}
+      <motion.img
+        src={imageUrl}
+        alt="cover"
+        className="img-fluid rounded mb-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        style={{ maxHeight: "300px", objectFit: "cover", width: "100%" }}
+      />
 
-      {/* Contenuto testuale */}
-      {lesson.content && (
-        <div className="mb-4">
-          <h5>📝 Contenuto:</h5>
-          <p>{lesson.content}</p>
-        </div>
-      )}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h1 className="fw-bold display-3 mb-2 text-center">{lesson.title}</h1>
 
-      {/* Media */}
-      {lesson.mediaType === "video" && (
-        <div className="mb-4">
-          <h5>🎬 Video:</h5>
-          <video controls width="100%" src={lesson.mediaUrl}></video>
+        <div className="mb-3 d-flex justify-content-center lead">
+          <Badge bg="info" className="me-2">
+            📘 Categoria: {lesson.category}
+          </Badge>
+          <Badge bg="secondary">🎓 Livello: {lesson.level}</Badge>
         </div>
-      )}
-      {lesson.mediaType === "pdf" && (
-        <div className="mb-4">
-          <h5>📄 PDF:</h5>
-          <iframe src={lesson.mediaUrl} width="100%" height="600px" title="PDF" />
-        </div>
-      )}
-      {lesson.mediaType === "image" && (
-        <div className="mb-4">
-          <h5>🖼️ Immagine:</h5>
-          <img src={lesson.mediaUrl} alt="media" className="img-fluid rounded" />
-        </div>
-      )}
 
-      <Button variant="primary" onClick={() => navigate("/dashboard/" + user.level)}>⬅️ Torna alle lezioni</Button>
+        {lesson.description && (
+          <div className="bg-info bg-opacity-25 rounded p-4 mb-4">
+            <h5 className="text-warning">🎯 Obiettivo della lezione:</h5>
+            <p>{lesson.description}</p>
+          </div>
+        )}
 
+        {lesson.content && (
+          <div className="mb-4">
+            <p style={{ whiteSpace: "pre-line" }}>{lesson.content}</p>
+          </div>
+        )}
+
+        {lesson.mediaType === "video" && (
+          <div className="mb-4">
+            <h5>🎬 Video:</h5>
+            <video controls width="100%" src={lesson.mediaUrl}></video>
+          </div>
+        )}
+        {lesson.mediaType === "pdf" && (
+          <div className="mb-4">
+            <h5>📄 PDF:</h5>
+            <iframe src={lesson.mediaUrl} width="100%" height="600px" title="PDF" />
+          </div>
+        )}
+        {lesson.mediaType === "image" && (
+          <div className="mb-4">
+            <h5>🖼️ Immagine:</h5>
+            <img src={lesson.mediaUrl} alt="media" className="img-fluid rounded" />
+          </div>
+        )}
+
+        <Button variant="primary" onClick={handleBack}>
+          ⬅️ Torna alle lezioni
+        </Button>
+      </motion.div>
     </Container>
   );
 };

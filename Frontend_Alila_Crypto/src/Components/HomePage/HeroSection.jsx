@@ -5,7 +5,7 @@ import "@/styles/HeroSection.css"
 
 function HeroSection() {
   return (
-    <section className="hero-section  text-light py-5">
+    <section className="hero-section  text-light py-3">
       <Container>
         <Row className="align-items-center">
           <Col xs={12} md={6} className="text-center text-md-start mb-4 mb-md-0">

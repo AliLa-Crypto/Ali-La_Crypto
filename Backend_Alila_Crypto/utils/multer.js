@@ -48,12 +48,12 @@ const lessonStorage = new CloudinaryStorage({
 // Filtro per Profilo
 const fileFilter = (req, file, cb) => {
   const allowedMimeTypes = [
-    'image/jpeg', 'image/png', 'image/jpg', 'image/HEIC',
+    'image/jpeg', 'image/png', 'image/jpg', 'image/heic', 'image/heif', 'image/webp',
   ];
   if (allowedMimeTypes.includes(file.mimetype.toLowerCase())) {
     cb(null, true);
   } else {
-    cb(new Error('❌ Formato file non supportato. Accettiamo solo jpg, jpeg e png.'), false);
+    cb(new Error('❌ Formato file non supportato. Accettiamo solo: JPG, JPEG, PNG, HEIC, WEBP.'), false);
   }
 };
 

@@ -12,18 +12,40 @@ export const getAllLessons = async (req, res) => {
 
 // POST nuova lezione
 export const createLesson = async (req, res) => {
-  const { title, description, level, category, type, content, mediaUrl, mediaType, publicId
-  } = req.body;
-
   try {
+    const {
+      title,
+      description,
+      level,
+      category,
+      type,
+      content = "",
+      mediaUrl = "",
+      mediaType = "",
+      publicId = ""
+    } = req.body;
+
+    if (!title || !description || !level || !category || !type) {
+      return res.status(400).json({ message: "Tutti i campi principali sono obbligatori." });
+    }
+
     const newLesson = new Lesson({
-      title, description, level, category, type, content, mediaUrl, mediaType, publicId
+      title,
+      description,
+      level,
+      category,
+      type,       // deve essere: "video", "pdf", "immagine", "testo", "quiz"
+      content,
+      mediaUrl,
+      mediaType,  // può essere "video", "image", "pdf"
+      publicId
     });
 
     await newLesson.save();
     res.status(201).json({ message: "Lezione creata con successo", lesson: newLesson });
+
   } catch (err) {
-    console.error("Errore nella creazione lezione:", err);
+    console.error("❌ Errore nella creazione della lezione:", err);
     res.status(500).json({ message: "Errore nella creazione della lezione" });
   }
 };

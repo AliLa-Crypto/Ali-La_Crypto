@@ -11,8 +11,10 @@ const GoogleLoginButton = () => {
 
   const handleGoogleLogin = async (credentialResponse) => {
     try {
+      const level = localStorage.getItem("level"); // recupera il livello scelto
       const response = await api.post(`/auth/google-popup`, {
         token: credentialResponse.credential,
+        level, // lo passa al backend
       });
 
       const { token, user } = response.data;
