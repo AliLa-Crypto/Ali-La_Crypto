@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.1](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.11.0...v1.11.1) (2025-06-12)
+
+
+### Bug Fixes
+
+* Debug e design, UX migliotato ([6e403ca](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/6e403cab8f755be98c7393f0bda5744eb3bcd4a5))
+
 ## [1.11.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.10.0...v1.11.0) (2025-06-09)
 
 
