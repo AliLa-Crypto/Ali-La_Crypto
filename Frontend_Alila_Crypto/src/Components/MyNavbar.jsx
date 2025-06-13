@@ -1,7 +1,9 @@
 import { Navbar, Nav, Container, NavDropdown, Offcanvas } from 'react-bootstrap';
-import logo from '@/assets/logo3.png';
 import { Link } from "react-router-dom";
-import { useAuth } from "@/context/AuthContext"; // <== IMPORTA
+import { useAuth } from "@/context/AuthContext";
+
+const logoSrc = "/logo3.png";
+
 
 export function MyNavbar() {
   
@@ -14,7 +16,7 @@ export function MyNavbar() {
         {/* 🔹 Logo + titolo */}
         <Navbar.Brand href="/" className="d-flex align-items-center mx-5">
           <img
-            src={logo}
+            src={logoSrc}
             alt="Ali&La Crypto logo"
             width="45"
             height="45"
