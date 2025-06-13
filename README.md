@@ -47,7 +47,7 @@ La piattaforma è attualmente in fase di sviluppo attivo.
 ## 🌐 Link alla piattaforma
 
 🔗 **Sito Web (Frontend – Produzione)**  
-👉 [https://alilacrypto.com](https://alilacrypto.com)
+👉https://ali-la-crypto.vercel.app/
 
 🔗 **API Backend (Produzione)**  
 👉 https://ali-la-crypto.onrender.com
