@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import api from "@/utils/api";
-import LessonCard from "@/components/User/LessonCard";
+import LessonCard from "@/Components/User/LessonCard";
 import { getUserFromToken } from "@/utils/auth";
 import "@/styles/LearnPage.css";
 
