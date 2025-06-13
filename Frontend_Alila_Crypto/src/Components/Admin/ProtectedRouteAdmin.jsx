@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { isUserLoggedIn, isAdmin } from "../../utils/auth";
+import { isUserLoggedIn, isAdmin } from "@/utils/auth";
 
 const ProtectedRouteAdmin = ({ children }) => {
   if (!isUserLoggedIn()) {

@@ -1,11 +1,10 @@
-// src/pages/PlatformDetailPage.jsx
 import { useParams } from "react-router-dom";
 import exchangeList from "@/data/exchangeList";
 import walletList from "@/data/walletList";
 import marketAnalysisList from "@/data/marketAnalysisList";
 import explorerList from "@/data/explorerList";
 import tradingList from "@/data/tradingList";
-import FeatureList from "@/components/FeatureList";
+import FeatureList from "@/Components/FeatureList";
 import { Container, Row, Col } from "react-bootstrap";
 
 const PlatformDetailPage = () => {

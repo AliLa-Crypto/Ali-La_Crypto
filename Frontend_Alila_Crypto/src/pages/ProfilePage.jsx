@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Form, Button, Card, Row, Col, Alert } from "react-bootstrap";
 import api from "@/utils/api";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import AvatarModal from "@/components/Profile/AvatarModal";
+import AvatarModal from "@/Components/Profile/AvatarModal";
 import "@/styles/ProfilePage.css";
 import { FaPlusCircle, FaPen } from "react-icons/fa";
 

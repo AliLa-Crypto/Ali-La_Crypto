@@ -1,17 +1,15 @@
-// components/Admin/LessonManager.jsx
-import React from "react";
 import { NavLink, Routes, Route } from "react-router-dom";
 import LessonCreate from "./LessonCreate";
 import LessonUploadMedia from "./LessonUploadMedia";
-// import LessonList from "./LessonList";
-// import LessonEdit from "./LessonEdit";
+import LessonList from "./LessonList";
+import LessonEdit from "./LessonEdit";
 
 const LessonManager = () => {
   return (
     <div className="text-light px-3">
       <h2 className="mb-4">📚 Gestione Lezioni</h2>
 
-      {/* Sottomenu */}
+      {/* Sotto menu */}
       <div className="d-flex flex-wrap gap-3 mb-4">
         <NavLink to="create" className="btn btn-outline-light">➕ Crea Lezione</NavLink>
         <NavLink to="upload" className="btn btn-outline-light">📤 Upload Media</NavLink>

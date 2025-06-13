@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import Sidebar from "@/components/Dashboard/Sidebar";
+import Sidebar from "@/Components/Dashboard/Sidebar";
 import LearnPage from "@/pages/Users/LearnPage";
 import api from "@/utils/api";
 import "@/styles/DashboardPage.css";
