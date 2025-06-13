@@ -1,9 +1,0 @@
-services:
-  - name: alila-backend
-    type: web
-    env: node
-    region: frankfurt
-    branch: main
-    rootDir: Backend_AliLa_Crypto
-    buildCommand: npm install
-    startCommand: npm start
