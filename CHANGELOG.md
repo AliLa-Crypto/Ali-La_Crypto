@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.11.1...v1.12.0) (2025-06-13)
+
+
+### Features
+
+* aggiunta sezione Strumenti ([f3874f8](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/f3874f84010acbdf1b1627fb14e9e025b024fa74))
+
 ### [1.11.1](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.11.0...v1.11.1) (2025-06-12)
 
 
