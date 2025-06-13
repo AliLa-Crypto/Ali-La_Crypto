@@ -50,7 +50,7 @@ La piattaforma è attualmente in fase di sviluppo attivo.
 👉 [https://alilacrypto.com](https://alilacrypto.com)
 
 🔗 **API Backend (Produzione)**  
-👉 [https://api.alilacrypto.com](https://api.alilacrypto.com)
+👉 https://ali-la-crypto.onrender.com
 
 ---
 
