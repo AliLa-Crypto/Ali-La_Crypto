@@ -17,6 +17,12 @@ import Unauthorized from "./pages/Unauthorized";
 import ProfilePage from "./pages/ProfilePage";
 import LearnPage from './pages/Users/LearnPage';
 import LessonDetailPage from './pages/Users/LessonDetailPage';
+import ExchangePage from "@/pages/Strumenti/ExchangePage";
+import WalletPage from "@/pages/Strumenti/WalletPage";
+import MarketPage from "@/pages/Strumenti/MarketPage";
+import ExplorerPage from "@/pages/Strumenti/ExplorerPage";
+import TradingPage from "@/pages/Strumenti/TradingPage";
+import PlatformDetailPage from "@/pages/Strumenti/PlatformDetailPage";
 import Footer from "./Components/Footer";
 
 function App() {
@@ -44,6 +50,15 @@ function App() {
           <Route path="/profilo" element={<ProfilePage />} />
           <Route path="/learn" element={<LearnPage />} />
           <Route path="/lessons/:id" element={<LessonDetailPage />} />
+
+          <Route path="/strumenti/exchange" element={<ExchangePage />} />
+          <Route path="/strumenti/wallet" element={<WalletPage />} />
+          <Route path="/strumenti/analisi" element={<MarketPage />} />
+          <Route path="/strumenti/explorer" element={<ExplorerPage />} />
+          <Route path="/strumenti/trading" element={<TradingPage />} />
+
+          {/* pagina dinamica */}
+          <Route path="/strumenti/:categoria/:slug" element={<PlatformDetailPage />} />
 
         </Routes>
       </div>

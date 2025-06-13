@@ -30,11 +30,11 @@ export function MyNavbar() {
             <Nav.Link as={Link} to="/about" className="text-white me-4">Chi siamo</Nav.Link>
             <NavDropdown title="Strumenti" id="tool-dropdown-sm" menuVariant="dark" 
                          className="me-4 dropdown-absolute">
-              <NavDropdown.Item as={Link} to="/exchange">Exchange</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/wallet">Wallet</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/market">Analisi Mercato</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/explorer">Explorer</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/trading">Trading</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/strumenti/exchange">Exchange</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/strumenti/wallet">Wallet</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/strumenti/market">Analisi Mercato</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/strumenti/explorer">Explorer</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/strumenti/trading">Trading</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </div>
@@ -59,11 +59,11 @@ export function MyNavbar() {
                 <Nav.Link className='text-white me-3' as={Link} to="/">Home</Nav.Link>
                 <Nav.Link as={Link} to="/about">Chi siamo</Nav.Link>
                 <NavDropdown title="Strumenti" id="tool-dropdown-lg">
-                  <NavDropdown.Item as={Link} to="/exchange">Exchange</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/wallet">Wallet</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/market">Analisi Mercato</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/explorer">Explorer</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/trading">Trading</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/strumenti/exchange">Exchange</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/strumenti/wallet">Wallet</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/strumenti/market">Analisi Mercato</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/strumenti/explorer">Explorer</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/strumenti/trading">Trading</NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Feed" id="feed-dropdown">
                   <NavDropdown.Item as={Link} to="/news">News</NavDropdown.Item>
