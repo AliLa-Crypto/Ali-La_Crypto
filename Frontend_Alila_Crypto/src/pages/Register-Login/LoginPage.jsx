@@ -4,7 +4,7 @@ import { Container, Form, Button, Alert, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import api from "@/utils/api";
 import { useAuth } from "@/context/AuthContext";
-import GoogleLoginButton from "@/components/GoogleLoginButton"; // ✅ IMPORT COMPONENTE
+import GoogleLoginButton from "@/Components/GoogleLoginButton";
 
 function LoginPage() {
   const navigate = useNavigate();

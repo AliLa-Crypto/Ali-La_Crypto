@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "@/styles/AdminSidebar.css";
 
-const AdminSidebar = () => {
+export default function AdminSidebar() {
   const navigate = useNavigate();
 
   return (
@@ -28,5 +28,3 @@ const AdminSidebar = () => {
     </div>
   );
 };
-
-export default AdminSidebar;
