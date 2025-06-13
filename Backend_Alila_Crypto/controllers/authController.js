@@ -1,6 +1,6 @@
 import User from "../models/User.js";
 import OtpCode from "../models/OtpCode.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import sgMail from "@sendgrid/mail";
 import crypto from "crypto";
