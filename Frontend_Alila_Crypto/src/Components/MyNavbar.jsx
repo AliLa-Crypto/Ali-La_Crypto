@@ -1,7 +1,7 @@
 import { Navbar, Nav, Container, NavDropdown, Offcanvas } from 'react-bootstrap';
-import logo from '../../assets/logo3.png';
+import logo from '@/assets/logo3.png';
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"; // <== IMPORTA
+import { useAuth } from "@/context/AuthContext"; // <== IMPORTA
 
 export function MyNavbar() {
   
