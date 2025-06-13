@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import logo from '@/assets/SoloLogo.png';
+import logo from '@/assets/soloLogo.png';
 import "@/styles/HeroSection.css"
 
 function HeroSection() {
