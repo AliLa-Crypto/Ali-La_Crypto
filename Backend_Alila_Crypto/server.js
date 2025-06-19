@@ -14,11 +14,14 @@ import lessonRoutes from "./routes/lessonRoutes.js";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3740;
 
 // Middleware CORS e JSON
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: [
+    'https://alilacrypto.com',
+    'https://www.alilacrypto.com'
+  ],
   credentials: true
 }));
 app.use(express.json());
