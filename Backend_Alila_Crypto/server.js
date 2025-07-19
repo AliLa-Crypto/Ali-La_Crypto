@@ -17,13 +17,15 @@ const app = express();
 const PORT = process.env.PORT || 3740;
 
 // Middleware CORS e JSON
+const allowedOrigins = process.env.NODE_ENV === "production"
+  ? ['https://alilacrypto.com', 'https://www.alilacrypto.com']
+  : ['http://localhost:5173'];
+
 app.use(cors({
-  origin: [
-    'https://alilacrypto.com',
-    'https://www.alilacrypto.com'
-  ],
+  origin: allowedOrigins,
   credentials: true
 }));
+
 app.use(express.json());
 
 

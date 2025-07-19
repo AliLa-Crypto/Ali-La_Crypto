@@ -47,7 +47,7 @@ const WelcomePage = () => {
   const currentIcon = iconMap[level] || <FaSmileBeam size={40} className="text-light mb-3" />;
 
   const handleGoToDashboard = () => {
-    navigate(`/dashboard/${level}`);
+    navigate(`/accademia/${level}`);
   };
 
   return (
@@ -63,7 +63,7 @@ const WelcomePage = () => {
             <h2 className={`text-${current.color} fw-bold mb-3`}>{current.title}</h2>
             <p className="fs-5">{current.description}</p>
             <Button variant={current.color} size="lg" className="mt-3" onClick={handleGoToDashboard}>
-              Vai alla Dashboard
+              Vai alla Accademia
             </Button>
           </Card.Body>
         </Card>
