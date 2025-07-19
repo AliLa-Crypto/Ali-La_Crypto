@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.12.0...v1.13.0) (2025-07-19)
+
+
+### Features
+
+* aggiunta nuova funzione in Backend e frontend ([7ca9d4c](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/7ca9d4cf26332ceed5c9ba1cc76706048cd374dc))
+
+
+### Bug Fixes
+
+* added temporary AdminSidebar to fix Vercel build ([fb146ac](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/fb146acfbba663371ae9a47e4352f6dd4716e77f))
+* corrected bcrypt import to bcryptjs ([6e274cf](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/6e274cf0249981310efe2ca9fdbe7e9a9fbbcec9))
+* corretto nome in soloLogo.png per build Vercel ([6263975](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/62639750542c6693bd4021ae22c3120a5a44cdfb))
+* downgrade cloudinary for Render deploy ([45dc5e3](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/45dc5e303d0be235173a82a72318db75f53bce65))
+* import GoogleLoginButton con path corretto per Vercel/Linux ([58332c6](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/58332c6dd19786a2c47b5a75a764c11f7ae76346))
+* modifica degli variabili d'ambiente ([78065dd](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/78065ddd75afc884562a0b12890793dee4928fb4))
+* percorso immagine logo navbar ([0a8940d](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/0a8940dd75bc84ea0ae4f0dc71d74fec7d4538f8))
+* percorso immagine logo navbar ([0a76cef](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/0a76cefe495fb398c23b00888419906b32848581))
+* react version corrected + reinstall ([c3e7f5d](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/c3e7f5d8fb9e1650f045863e4838c3828eef791f))
+* renamed Logo3.png to logo3.png for Linux/Vercel ([5f934f0](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/5f934f0a1de5de57adbd93da4ed1347b36e34de8))
+* rinomina forzata di tutti i logo per compatibilità con Vercel/Linux ([f744a24](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/f744a246ccafef4126c200762e2084b8e6e19aa7))
+* rinominata cartella components ([e6c711b](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/e6c711bf9c18536207a0b5e080199caae3abdd21))
+* rinominata cartella components ([081f1d3](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/081f1d3a78acbc4a7b7d49349224d4b46f1e42de))
+* rinominato solo_logo_temp.png in soloLogo.png per Vercel ([4e6e50d](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/4e6e50df202dd4e808b3bfda7e15658d27cdf0a5))
+* ripristinato soloLogo.png con nome corretto per Vercel ([a83a40c](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/a83a40c9a0d3b5ab52dff9c7d8708f095a96ed62))
+* soloLogo nel import ([f5f9138](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/f5f91388870c6a422550e0a470144cc15642dab9))
+* spostato logo3.png in public/ e aggiornato import ([c43e955](https://github.com/AliLa-Crypto/Ali-La_Crypto/commit/c43e9553d123590315356cb28117cf8d03d3787a))
+
 ### [1.12.1](https://github.com/AliLa-Crypto/Ali-La_Crypto/compare/v1.12.0...v1.12.1) (2025-06-19)
 
 
