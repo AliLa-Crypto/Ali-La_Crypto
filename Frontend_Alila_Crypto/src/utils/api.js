@@ -2,7 +2,8 @@ import axios from "axios";
 import { getToken } from "./auth";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
+  baseURL: import.meta.env.VITE_BACKEND_URL + "/api",
+  withCredentials: true // 🔒 NECESSARIO per autenticazione
 });
 
 // Interceptor - aggiunge il token JWT a ogni richiesta - Per scrivere meno codice

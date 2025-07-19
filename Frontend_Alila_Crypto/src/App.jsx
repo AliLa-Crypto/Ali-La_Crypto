@@ -23,6 +23,9 @@ import MarketPage from "@/pages/Strumenti/MarketPage";
 import ExplorerPage from "@/pages/Strumenti/ExplorerPage";
 import TradingPage from "@/pages/Strumenti/TradingPage";
 import PlatformDetailPage from "@/pages/Strumenti/PlatformDetailPage";
+import NewsPage from './pages/NewsPage';
+import GlossarioPage from './pages/GlossarioPage';
+import FinanzaPage from './pages/FinanzaPage';
 import Footer from "./Components/Footer";
 
 function App() {
@@ -59,6 +62,10 @@ function App() {
 
           {/* pagina dinamica */}
           <Route path="/strumenti/:categoria/:slug" element={<PlatformDetailPage />} />
+
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/glossario" element={<GlossarioPage />} />
+          <Route path="/finanza" element={<FinanzaPage />} />
 
         </Routes>
       </div>

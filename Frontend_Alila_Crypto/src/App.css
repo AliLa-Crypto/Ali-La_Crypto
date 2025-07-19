@@ -1,5 +1,6 @@
 body, html {
-  height: 100%;
+  height: 100vw;
+  overflow-x: hidden;
   margin: 0;
 }
 
@@ -56,5 +57,38 @@ body, html {
   .app-content {
     margin-left: 0 !important;
     padding: 1rem;
+  }
+}
+
+/* NAVBAR ICON STYLING */
+.navbar-icon-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: white !important;
+  font-size: 1.3rem !important;
+  padding: 0.5rem !important;
+  position: relative !important;
+}
+
+.navbar-icon-link:hover::after {
+  content: attr(data-tooltip) !important;
+  position: absolute !important;
+  bottom: -2.2rem !important;
+  background-color: #333 !important;
+  color: white !important;
+  font-size: 0.75rem !important;
+  padding: 0.3rem 0.6rem !important;
+  border-radius: 6px !important;
+  white-space: nowrap !important;
+  opacity: 1 !important;
+  transition: opacity 0.2s !important;
+  z-index: 9999 !important;
+}
+
+/* Nascondi tooltip su mobile */
+@media (max-width: 991px) {
+  .navbar-icon-link:hover::after {
+    display: none !important;
   }
 }
