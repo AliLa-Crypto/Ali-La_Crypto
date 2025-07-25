@@ -12,13 +12,15 @@ Qui troverai la roadmap dettagliata per lo sviluppo, versione dopo versione.
 
 ## 👨‍💻 Stack Tecnologico
 
-### Frontend:
+### Frontend
+
 - React ⚛️
 - Bootstrap 🎨
 - React Router 🚦
 - Chart.js 📊
 
-### Backend:
+### Backend
+
 - Node.js 🚀
 - Express 🧩
 - MongoDB + Mongoose 🍃
@@ -31,8 +33,10 @@ Qui troverai la roadmap dettagliata per lo sviluppo, versione dopo versione.
 ## 🧭 Roadmap di Sviluppo
 
 ### 🔷 v1.0 – Fondamenta + Autenticazione + Homepage  
+
 🗓 Deadline: 26 maggio  
 ✅ Include:
+
 - Homepage 3D/interattiva 👋
 - Pulsanti livelli 🟡🟢🔴 con descrizioni dinamiche
 - Routing intelligente per livello
@@ -42,8 +46,10 @@ Qui troverai la roadmap dettagliata per lo sviluppo, versione dopo versione.
 ---
 
 ### 🔷 v1.5 – Educazione (Learn) + Sicurezza  
+
 🗓 Deadline: 30 maggio  
 ✅ Include:
+
 - Percorsi guidati per ogni livello 📚
 - Quiz e articoli filtrati per livello
 - Tracking progresso ➡️ Avanzamento livello
@@ -53,8 +59,10 @@ Qui troverai la roadmap dettagliata per lo sviluppo, versione dopo versione.
 ---
 
 ### 🔷 v2.0 – Community Base + Portfolio + Finanza Teorica  
+
 🗓 Deadline: 3 giugno  
 ✅ Include:
+
 - Forum diviso per livello 🤝
 - Profili utente personalizzati 🧍‍♂️
 - Gamification base (XP, badge iniziali) 🎮
@@ -64,8 +72,10 @@ Qui troverai la roadmap dettagliata per lo sviluppo, versione dopo versione.
 ---
 
 ### 🔷 v2.5 – Trading Base + Watchlist + News  
+
 🗓 Deadline: 6 giugno  
 ✅ Include:
+
 - Ticker prezzi real-time + grafici 📈
 - Feed news automatizzato 🗞
 - Watchlist personalizzabile ⭐
@@ -75,8 +85,10 @@ Qui troverai la roadmap dettagliata per lo sviluppo, versione dopo versione.
 ---
 
 ### 🔷 v3.0 – Admin Panel + Moderazione + Sicurezza  
+
 🗓 Deadline: 9 giugno  
 ✅ Include:
+
 - Dashboard admin 🧾
 - Flag contenuti + gestione segnalazioni ⚠️
 - Ban/unban utenti
@@ -86,8 +98,10 @@ Qui troverai la roadmap dettagliata per lo sviluppo, versione dopo versione.
 ---
 
 ### 🔷 v3.5 – QA Finale + Script presentazione  
+
 🗓 Deadline: 12 giugno  
 ✅ Include:
+
 - Refactor UI finale 🎨
 - Seed DB (contenuti demo, utenti, quiz) 🌱
 - Script per demo / pitch 👩‍🏫
@@ -98,15 +112,18 @@ Qui troverai la roadmap dettagliata per lo sviluppo, versione dopo versione.
 ## 🐉 Versioni Future (post-diploma)
 
 ### 🔹 v4.0 – Community Avanzata + AI Didattica
+
 - Eventi live + AMA 🎙
 - Canali privati DAO 👥
 - Chat AI (AliLaBot) 🤖
 
 ### 🔹 v5.0 – Trading Demo + Analisi Tecnica
+
 - API Binance demo 🔁
 - Indicatori tecnici (RSI, MACD...) 📐
 
 ### 🔹 v6.0 – Portfolio reale + Finanza Pro
+
 - Multi-wallet reale con API 🔗
 - Dashboard Finanza Personale avanzata 💼
 - Leaderboard + premi 🏆
@@ -114,6 +131,7 @@ Qui troverai la roadmap dettagliata per lo sviluppo, versione dopo versione.
 ---
 
 ## 📂 Struttura consigliata cartelle
+
 ```
 src/
   Components/
