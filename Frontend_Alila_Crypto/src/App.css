@@ -138,7 +138,7 @@ nav-link-custom {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 415px) {
   
   .navbar-brand-responsive {
     margin-left: 0.1rem !important;
