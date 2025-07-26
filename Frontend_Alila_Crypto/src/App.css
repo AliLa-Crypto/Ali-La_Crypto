@@ -151,7 +151,7 @@ nav-link-custom {
     width: 30px !important;
     height: 30px !important;
     margin-right: 4px !important;
-    margin-bottom: 4px !important;
+    padding-bottom: 4px !important;
   }
   .brand-title {
     font-size: 1.10rem !important;
