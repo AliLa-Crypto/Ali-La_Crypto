@@ -15,7 +15,7 @@ export function MyNavbar() {
 
   return (
     <Navbar key="lg" expand="lg" bg="dark" variant="dark" sticky="top" className="navbar-custom sm-pb-2">
-      <Container fluid className='pb-3 pt-3'>
+      <Container fluid>
         {/* 🔹 Logo + titolo */}
         <Navbar.Brand href="/" className="d-flex align-items-center navbar-brand-responsive">
           <img
