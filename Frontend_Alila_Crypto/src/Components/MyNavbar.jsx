@@ -29,7 +29,7 @@ export function MyNavbar() {
         </Navbar.Brand>
 
         {/* 🔹Home + Chi siamo sempre visibili per sm/md */}
-        <div className="d-lg-none d-flex ms-auto align-items-center gap-3">
+        <div className="d-lg-none d-flex ms-auto align-items-center gap-1">
           <Nav className="d-flex flex-row align-items-center">
             <Nav.Link className='navbar-icon-link text-white' 
                       aria-label="Home"

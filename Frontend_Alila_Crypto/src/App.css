@@ -17,7 +17,7 @@ body, html {
 /* Rende il menu a tendina assoluto rispetto al body */
 .dropdown-absolute .dropdown-menu {
   position: absolute !important;
-  top: 100% !important;
+  top: 90% !important;
   left: 0;
   z-index: 1050;
   margin-top: 0.5rem;
@@ -141,16 +141,17 @@ nav-link-custom {
 @media (max-width: 415px) {
   
   .navbar-brand-responsive {
-    margin-left: 0.3rem !important;
+    margin-left: 0.1rem !important;
     margin-right: 0.3rem !important;
     max-width: 70vw !important;
     min-width: 0 !important;
     flex-shrink: 1;
   }
   .navbar-brand-responsive img {
-    width: 32px !important;
-    height: 32px !important;
-    margin-right: 5px !important;
+    width: 30px !important;
+    height: 30px !important;
+    margin-right: 4px !important;
+    margin-bottom: 4px !important;
   }
   .brand-title {
     font-size: 1.10rem !important;
@@ -161,15 +162,14 @@ nav-link-custom {
     vertical-align: middle;
   }
   .navbar-custom {
-    padding-top: 0.6rem !important;
-    padding-bottom: 0.6rem !important;
+    padding-top: 0.7rem !important;
+    padding-bottom: 0.8rem !important;
     padding-left: 0.1rem !important;
     padding-right: 0.1rem !important;
     min-height: 48px !important;
   }
   .navbar-icon-link {
-    font-size: 1.35rem !important;
+    font-size: 1.45rem !important;
     padding: 0.2rem 0.2rem !important;
-    /* margin: 0 1px !important; */
   }
 }
