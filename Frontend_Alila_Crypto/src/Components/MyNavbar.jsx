@@ -38,12 +38,6 @@ export function MyNavbar() {
                       as={Link} to="/">
                         <FaHome />
             </Nav.Link>
-            <Nav.Link className="navbar-icon-link text-white me-2"
-                      aria-label="Chi siamo"
-                      data-tooltip="Chi siamo"
-                      as={Link} to="/about" >
-                        <FaUsers />
-            </Nav.Link>
           
           </Nav>
         </div>
@@ -146,6 +140,13 @@ export function MyNavbar() {
 
               {/* 🔸 Solo sm/md – voci che non sono già sopra */}
               <div className="d-lg-none">
+                <Nav.Link className="navbar-icon-link text-white me-2"
+                          aria-label="Chi siamo"
+                          data-tooltip="Chi siamo"
+                          as={Link} to="/about"
+                          onClick={() => setShowOffcanvas(false)} >
+                            <FaUsers />
+                </Nav.Link>
                 <NavDropdown title="Strumenti" 
                              id="tool-dropdown" 
                              menuVariant="dark" 
