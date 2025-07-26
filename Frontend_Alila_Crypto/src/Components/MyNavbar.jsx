@@ -28,7 +28,7 @@ export function MyNavbar() {
           <span className="fw-bold brand-title ">Ali&La Crypto</span>
         </Navbar.Brand>
 
-        {/* 🔹 Chi siamo + Tool sempre visibili per sm/md */}
+        {/* 🔹Home + Chi siamo sempre visibili per sm/md */}
         <div className="d-lg-none d-flex ms-auto align-items-center gap-3">
           <Nav className="d-flex flex-row align-items-center">
             <Nav.Link className='navbar-icon-link text-white' 
@@ -44,18 +44,7 @@ export function MyNavbar() {
                       as={Link} to="/about" >
                         <FaUsers />
             </Nav.Link>
-            <NavDropdown title={<FaTools data-tooltip="Strumenti" />} 
-                         id="tool-dropdown" 
-                         menuVariant="dark" 
-                         className="navbar-icon-link  dropdown-absolute"
-                         aria-label="Strumenti"
-                         data-tooltip="Strumenti">
-              <NavDropdown.Item as={Link} to="/strumenti/exchange">Exchange</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/strumenti/wallet">Wallet</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/strumenti/market">Analisi Mercato</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/strumenti/explorer">Explorer</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/strumenti/trading">Trading</NavDropdown.Item>
-            </NavDropdown>
+          
           </Nav>
         </div>
 
@@ -157,6 +146,16 @@ export function MyNavbar() {
 
               {/* 🔸 Solo sm/md – voci che non sono già sopra */}
               <div className="d-lg-none">
+                <NavDropdown title="Strumenti" 
+                             id="tool-dropdown" 
+                             menuVariant="dark" 
+                             className=" dropdown-absolute">
+                  <NavDropdown.Item as={Link} to="/strumenti/exchange" onClick={() => setShowOffcanvas(false)}>Exchange</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/strumenti/wallet" onClick={() => setShowOffcanvas(false)}>Wallet</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/strumenti/market" onClick={() => setShowOffcanvas(false)}>Analisi Mercato</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/strumenti/explorer" onClick={() => setShowOffcanvas(false)}>Explorer</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/strumenti/trading" onClick={() => setShowOffcanvas(false)}>Trading</NavDropdown.Item>
+                </NavDropdown>
                 <NavDropdown title="Notizie" 
                              id="feed-dropdown-sm" 
                              menuVariant="dark" >
