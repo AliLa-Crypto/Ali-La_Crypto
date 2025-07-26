@@ -56,7 +56,7 @@ export function MyNavbar() {
           id="offcanvas-navbar"
           aria-labelledby="offcanvas-navbar-label"
           placement="end"
-          className="bg-dark text-light offcanvas-scroll"
+          className="bg-dark text-light offcanvas-scroll offcanvas-sm"
           show={showOffcanvas}
           onHide={() => setShowOffcanvas(false)}>
           <Offcanvas.Header closeButton closeVariant="white">
