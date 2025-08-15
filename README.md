@@ -6,7 +6,7 @@ Il progetto nasce per offrire un'esperienza di apprendimento completa e accessib
 
 ### 🌐 Live Demo
 
-🔴 [Vai alla piattaforma](www.alilacrypto.com) - www.alilacrypto.com
+🔴 [Vai alla piattaforma](https://www.alilacrypto.com) - www.alilacrypto.com
 
 ---
 
@@ -19,7 +19,7 @@ Il progetto nasce per offrire un'esperienza di apprendimento completa e accessib
 </p>
 
 <p align="center">
-  <img src="https://github.com/AliLa-Crypto/Ali-La_Crypto/blob/main/profillo.png" alt="Profillo" width="32%">
+  <img src="https://github.com/AliLa-Crypto/Ali-La_Crypto/blob/main/profilo.png" alt="Profilo" width="32%">
   <img src="https://github.com/AliLa-Crypto/Ali-La_Crypto/blob/main/lezioni.png" alt="Lezioni" width="32%">
   <img src="https://github.com/AliLa-Crypto/Ali-La_Crypto/blob/main/lezione1.png" alt="Lezione – parte 2" width="32%">
 </p>
@@ -124,5 +124,10 @@ Puoi usarlo, modificarlo e condividerlo secondo i termini della licenza.
 
 🔗 [Leggi il testo completo della licenza](https://www.gnu.org/licenses/gpl-3.0.html)
 
+---
+## 📬 Contatti
 
+- [LinkedIn](https://www.linkedin.com/in/alina-galben/)  
+- Email: alinagalben@gmail.com
+- 📍 Disponibile a Catania e provincia, oppure per lavori da remoto!
 
