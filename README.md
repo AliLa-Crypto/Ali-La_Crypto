@@ -127,7 +127,7 @@ Puoi usarlo, modificarlo e condividerlo secondo i termini della licenza.
 ---
 ## 📬 Contatti
 
-- [LinkedIn](https://www.linkedin.com/in/alina-galben/)  
-- Email: alinagalben@gmail.com
+- 🔗 [LinkedIn](https://www.linkedin.com/in/alina-galben/)  
+- 📧 Email: alinagalben@gmail.com
 - 📍 Disponibile a Catania e provincia, oppure per lavori da remoto!
 
