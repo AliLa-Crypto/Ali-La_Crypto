@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import Sidebar from "@/Components/Dashboard/Sidebar";
 import LearnPage from "@/pages/Users/LearnPage";
 import api from "@/utils/api";
@@ -80,8 +80,22 @@ const DashboardPage = () => {
 
   return (
     <>
+      {/* Messaggio di accesso */}
+      {accessMessage && (
+        <div className="px-3 pt-3 d-lg-none">
+          <Alert variant="info" className="mb-0">
+            {accessMessage}
+          </Alert>
+        </div>
+      )}
+
       {/* ✅ Layout LG+ (fisso) */}
       <Container fluid className="pt-3 text-light d-none d-lg-block">
+        {accessMessage && (
+          <Alert variant="info" className="mb-3">
+            {accessMessage}
+          </Alert>
+        )}
         <Row className="gx-0">
           <Col xs={12} md={3} lg={2} className="bg-black p-3 border-end border-secondary">
             <Sidebar onSelect={setSelectedModule} selected={selectedModule} />

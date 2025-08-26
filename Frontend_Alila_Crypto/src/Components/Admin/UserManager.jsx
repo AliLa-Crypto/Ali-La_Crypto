@@ -13,6 +13,7 @@ const UserManager = () => {
       setUsers(response.data);
       setLoading(false);
     } catch (err) {
+      console.error(err);
       setError("Errore nel caricamento utenti");
       setLoading(false);
     }
@@ -26,7 +27,8 @@ const UserManager = () => {
     try {
       await api.patch(`/admin/users/${id}/role`, { level: role });
       fetchUsers(); // aggiorna lista
-    } catch {
+    } catch (err) {
+      console.error(err);
       alert("Errore nel cambio ruolo");
     }
   };
@@ -36,7 +38,8 @@ const UserManager = () => {
     try {
       await api.delete(`/admin/users/${id}`);
       fetchUsers(); // aggiorna lista
-    } catch {
+    } catch (err) {
+      console.error(err);
       alert("Errore nella cancellazione utente");
     }
   };

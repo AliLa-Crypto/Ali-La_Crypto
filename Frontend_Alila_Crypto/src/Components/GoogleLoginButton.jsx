@@ -1,7 +1,7 @@
 import { GoogleLogin } from "@react-oauth/google";
 import api from "@/utils/api";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "@/context/auth-context"; // importa il context
 
 
 const GoogleLoginButton = () => {

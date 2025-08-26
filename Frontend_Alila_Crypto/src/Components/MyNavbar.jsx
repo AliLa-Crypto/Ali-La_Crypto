@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Navbar, Nav, Container, NavDropdown, Offcanvas } from 'react-bootstrap';
 import { FaHome, FaUsers, FaTools, FaNewspaper, FaWallet, FaBook, FaShoppingCart, FaUserCircle, FaUserCheck, FaSignInAlt, FaPiggyBank } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/auth-context";
 
 const logoSrc = "/logo3.png";
 

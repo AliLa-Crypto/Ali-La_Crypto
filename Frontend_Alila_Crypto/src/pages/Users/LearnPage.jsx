@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import api from "@/utils/api";
 import LessonCard from "@/Components/User/LessonCard";
@@ -8,24 +8,28 @@ import "@/styles/LearnPage.css";
 const LearnPage = () => {
   const [lessons, setLessons] = useState([]);
   const user = getUserFromToken();
+  const userLevel = (user?.level || "").toLowerCase();
 
-  const fetchLessons = async () => {
+  // ✅ useCallback: funzione stabile, dipende solo dal livello utente
+  const fetchLessons = useCallback(async () => {
     try {
       const res = await api.get("/lessons/public");
       const allLessons = res.data;
-      const userLevel = user?.level?.toLowerCase();
-      const filtered = allLessons.filter(
-        (l) => l.level?.toLowerCase() === userLevel
-      );
+
+      const filtered = userLevel
+        ? allLessons.filter((l) => (l.level || "").toLowerCase() === userLevel)
+        : allLessons;
+
       setLessons(filtered);
     } catch (err) {
       console.error("❌ Errore nel caricamento lezioni", err);
     }
-  };
+  }, [userLevel]);
 
+  // ✅ l’effetto dipende dalla funzione (quindi dal livello)
   useEffect(() => {
     fetchLessons();
-  }, []);
+  }, [fetchLessons]);
 
   return (
     <Container className="mt-4 text-light">

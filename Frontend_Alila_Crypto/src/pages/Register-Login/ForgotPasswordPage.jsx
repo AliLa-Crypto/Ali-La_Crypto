@@ -12,6 +12,7 @@ const ForgotPasswordPage = () => {
       await api.post(`/auth/forgot-password`, { email });
       setMessage("Controlla la tua email per reimpostare la password.");
     } catch (err) {
+      console.error(err);
       setMessage("Errore. Riprova.");
     }
   };

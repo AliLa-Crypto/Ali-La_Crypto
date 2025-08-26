@@ -28,6 +28,7 @@ const ResetPasswordPage = () => {
       setConfermaPassword("");
 
     } catch (err) {
+      console.error(err);
       setMessage("Errore. Token scaduto o non valido.");
     }
   };

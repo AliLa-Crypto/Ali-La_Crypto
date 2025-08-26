@@ -11,6 +11,10 @@ import nft1 from "@/assets/backgrounds/nft1.webp";
 // import nft2 from "@/assets/backgrounds/nft2.png";
 // import fallback from "@/assets/backgrounds/Logo1.png"; // immagine generica
 
+// ✅ Componenti “maiuscoli” derivati da motion (evita l’errore ESLint)
+const MotionImg = motion.img;
+const MotionDiv = motion.div;
+
 const LessonDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -33,6 +37,7 @@ const LessonDetailPage = () => {
 
         setLesson(fetchedLesson);
       } catch (err) {
+        console.error(err);
         setErrorMsg("❌ Errore nel caricamento della lezione.");
       } finally {
         setLoading(false);
@@ -69,7 +74,7 @@ const LessonDetailPage = () => {
   return (
     <Container className="lesson-detail-container px-5 py-4 text-light lead">
       {/* ✅ Copertina dinamica */}
-      <motion.img
+      <MotionImg
         src={imageUrl}
         alt="cover"
         className="img-fluid rounded mb-4"
@@ -79,7 +84,7 @@ const LessonDetailPage = () => {
         style={{ maxHeight: "300px", objectFit: "cover", width: "100%" }}
       />
 
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -128,7 +133,7 @@ const LessonDetailPage = () => {
         <Button variant="primary" onClick={handleBack}>
           ⬅️ Torna alle lezioni
         </Button>
-      </motion.div>
+      </MotionDiv>
     </Container>
   );
 };

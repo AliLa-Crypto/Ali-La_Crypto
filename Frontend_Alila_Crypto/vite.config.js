@@ -1,16 +1,23 @@
+/* eslint-env node */
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path from 'path';
+import { fileURLToPath } from 'url'
+import { dirname, resolve } from 'path'
+import { visualizer } from 'rollup-plugin-visualizer'
+
+// ESM-safe __dirname
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), visualizer({ filename: 'dist/stats.html', template: 'treemap' })],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': resolve(__dirname, './src'),
     },
   },
   server: {
-    open: true // 👈 Apre il browser automaticamente
-  }
+    open: true, // 👈 Apre il browser automaticamente
+  },
 })

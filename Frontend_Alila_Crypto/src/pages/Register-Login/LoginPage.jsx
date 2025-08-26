@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Container, Form, Button, Alert, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import api from "@/utils/api";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/auth-context";
 import GoogleLoginButton from "@/Components/GoogleLoginButton";
 
 function LoginPage() {

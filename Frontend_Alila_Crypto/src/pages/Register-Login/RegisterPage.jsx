@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import api from "@/utils/api";
 import "@/styles/RegisterPage.css";
 import { GoogleLogin } from "@react-oauth/google";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "@/context/auth-context";
 
 function RegisterPage() {
   const { level } = useParams(); // es. 'principiante', 'intermedio', 'pro'
