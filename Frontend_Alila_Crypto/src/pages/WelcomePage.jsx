@@ -4,6 +4,9 @@ import { Container, Button, Card, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaBookOpen, FaUsers, FaChartLine, FaSmileBeam, FaRocket, FaGem } from "react-icons/fa";
 
+// ✅ componente “maiuscolo” derivato da motion
+const MotionDiv = motion.div;
+
 const WelcomePage = () => {
   const { level } = useParams();
   const navigate = useNavigate();
@@ -52,7 +55,7 @@ const WelcomePage = () => {
 
   return (
     <Container className="py-5 text-light">
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -92,7 +95,7 @@ const WelcomePage = () => {
             </div>
           </Col>
         </Row>
-      </motion.div>
+      </MotionDiv>
     </Container>
   );
 };

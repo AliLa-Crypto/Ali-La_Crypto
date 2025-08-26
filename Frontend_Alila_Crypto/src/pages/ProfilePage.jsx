@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Form, Button, Card, Row, Col, Alert } from "react-bootstrap";
 import api from "@/utils/api";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/auth-context";
 import { useNavigate } from "react-router-dom";
 import AvatarModal from "@/Components/Profile/AvatarModal";
 import "@/styles/ProfilePage.css";
@@ -43,6 +43,7 @@ const ProfilePage = () => {
       setBio("");
       document.getElementById("bio-section")?.scrollIntoView({ behavior: "smooth" });
     } catch (err) {
+      console.error(err);
       setSuccessMessage("❌ Errore durante il salvataggio.");
     }
   };
@@ -65,6 +66,7 @@ const ProfilePage = () => {
       login(localStorage.getItem("token"));
       setSuccessMessage("✅ Avatar caricato con successo!");
     } catch (err) {
+      console.error(err);
       setSuccessMessage("❌ Errore durante l'upload dell'immagine.");
     }
   };

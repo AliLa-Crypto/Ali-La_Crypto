@@ -1,8 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "./auth-context"; // <-- usa il context dal file separato
 
-const AuthContext = createContext();
-
+/** Unico export: componente Provider */
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); // oggetto utente o null
 
@@ -16,9 +16,8 @@ export const AuthProvider = ({ children }) => {
         setUser({
           level: decoded.level,
           isAdmin: decoded.isAdmin,
-          avatarURL: storedAvatar, // ✅ recupera avatar salvato
+          avatarURL: storedAvatar,
         });
-
       } catch (err) {
         console.error("Token non valido", err);
         localStorage.removeItem("token");
@@ -38,9 +37,8 @@ export const AuthProvider = ({ children }) => {
       setUser({
         level: decoded.level,
         isAdmin: decoded.isAdmin,
-        avatarURL: storedAvatar, // ✅ salva anche qui
+        avatarURL: storedAvatar,
       });
-
     } catch (err) {
       console.error("Errore nel salvataggio login:", err);
     }
@@ -59,4 +57,4 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export default AuthProvider;

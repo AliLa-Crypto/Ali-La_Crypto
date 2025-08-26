@@ -13,6 +13,7 @@ export const getUserFromToken = () => {
   try {
     return jwtDecode(token);
   } catch (err) {
+    console.error("getUserFromToken: token non valido", err);
     return null;
   }
 };
@@ -25,6 +26,7 @@ export const isAdmin = () => {
     const decoded = jwtDecode(token);
     return decoded.isAdmin === true;
   } catch (error) {
+    console.error("isAdmin: errore nella decodifica JWT", error);
     return false;
   }
 };
@@ -33,5 +35,3 @@ export const isAdmin = () => {
 export const getToken = () => {
   return localStorage.getItem("token");
 };
-
-
