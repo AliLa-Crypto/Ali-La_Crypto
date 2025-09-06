@@ -80,7 +80,9 @@ export const login = async (req, res) => {
         username: user.username,
         email: user.email,
         level: user.level,
-        isAdmin: user.isAdmin,
+        isAdmin: user.isAdmin === true,
+        xp: user.xp,
+        avatarURL: user.avatarURL,
       }
     });
   } catch (err) {

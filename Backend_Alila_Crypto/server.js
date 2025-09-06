@@ -30,7 +30,7 @@ app.use(express.json());
 
 
 // Connessione al DB
-connectDB();
+await connectDB();
 
 // API
 app.use("/api/auth", authRoutes);
