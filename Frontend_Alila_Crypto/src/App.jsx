@@ -35,9 +35,14 @@ const ExplorerPage          = lazy(() => import("@/pages/Strumenti/ExplorerPage"
 const TradingPage           = lazy(() => import("@/pages/Strumenti/TradingPage"));
 const PlatformDetailPage    = lazy(() => import("@/pages/Strumenti/PlatformDetailPage"));
 
+const AboutPage             = lazy(() => import("@/pages/AboutPage"));
+const ArticoliPage          = lazy(() => import("@/pages/ArticoliPage"));
+const CarrelloPage          = lazy(() => import("@/pages/CarrelloPage"));
 const NewsPage              = lazy(() => import("@/pages/NewsPage"));
 const GlossarioPage         = lazy(() => import("@/pages/GlossarioPage"));
 const FinanzaPage           = lazy(() => import("@/pages/FinanzaPage"));
+const ForumPage             = lazy(() => import("@/pages/ForumPage"));
+const PortfolioPage         = lazy(() => import("@/pages/PortfolioPage"));
 
 function App() {
   return (
@@ -82,9 +87,14 @@ function App() {
             <Route path="/strumenti/trading" element={<TradingPage />} />
             <Route path="/strumenti/:categoria/:slug" element={<PlatformDetailPage />} />
 
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/news" element={<NewsPage />} />
+            <Route path="/articoli" element={<ArticoliPage />} />
+            <Route path="/carrello" element={<CarrelloPage />} />
             <Route path="/glossario" element={<GlossarioPage />} />
             <Route path="/finanza" element={<FinanzaPage />} />
+            <Route path="/forum" element={<ForumPage />} />
+            <Route path="/portfolio" element={<PortfolioPage />} />
           </Routes>
         </Suspense>
       </div>

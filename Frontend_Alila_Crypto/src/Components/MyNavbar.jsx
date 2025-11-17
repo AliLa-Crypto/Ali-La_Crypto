@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Navbar, Nav, Container, NavDropdown, Offcanvas } from 'react-bootstrap';
 import { FaHome, FaUsers, FaTools, FaNewspaper, FaWallet, FaBook, FaShoppingCart, FaUserCircle, FaUserCheck, FaSignInAlt, FaPiggyBank } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -81,7 +81,7 @@ export function MyNavbar() {
                              data-tooltip="Strumenti">
                   <NavDropdown.Item as={Link} to="/strumenti/exchange">Exchange</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/strumenti/wallet">Wallet</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/strumenti/market">Analisi Mercato</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/strumenti/analisi">Analisi Mercato</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/strumenti/explorer">Explorer</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/strumenti/trading">Trading</NavDropdown.Item>
                 </NavDropdown>
@@ -151,7 +151,7 @@ export function MyNavbar() {
                              className=" dropdown-absolute">
                   <NavDropdown.Item as={Link} to="/strumenti/exchange" onClick={() => setShowOffcanvas(false)}>Exchange</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/strumenti/wallet" onClick={() => setShowOffcanvas(false)}>Wallet</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/strumenti/market" onClick={() => setShowOffcanvas(false)}>Analisi Mercato</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/strumenti/analisi" onClick={() => setShowOffcanvas(false)}>Analisi Mercato</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/strumenti/explorer" onClick={() => setShowOffcanvas(false)}>Explorer</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/strumenti/trading" onClick={() => setShowOffcanvas(false)}>Trading</NavDropdown.Item>
                 </NavDropdown>

@@ -133,7 +133,7 @@ const ProfilePage = () => {
                 <Button variant="outline-light" onClick={() => navigate("/learn")}>📚 Educazione</Button>
                 <Button variant="outline-light" onClick={() => navigate("/forum")}>💬 Community</Button>
                 <Button variant="outline-light" onClick={() => navigate("/portfolio")}>📈 Portfolio</Button>
-                <Button variant="outline-light" onClick={() => navigate("/finanza-personale")}>💼 Finanza</Button>
+                <Button variant="outline-light" onClick={() => navigate("/finanza")}>💼 Finanza</Button>
                 {userData.isAdmin && (
                   <Button variant="outline-warning" onClick={() => navigate("/admin/dashboard")}>
                     🛠️ Admin

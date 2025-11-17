@@ -1,5 +1,5 @@
+import ComingSoon from '../Components/ComingSoon';
+
 export default function NewsPage() {
-  return (
-    <h1 className="text-white">Questa è la pagina News</h1>
-  )
+  return <ComingSoon title="News" />;
 }

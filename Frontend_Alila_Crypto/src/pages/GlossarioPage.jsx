@@ -1,5 +1,5 @@
+import ComingSoon from '../Components/ComingSoon';
+
 export default function GlossarioPage() {
-  return (
-    <h1 className="text-white">Questa è la pagina Glossario</h1>
-  )
+  return <ComingSoon title="Finanza Personale" />;
 }
