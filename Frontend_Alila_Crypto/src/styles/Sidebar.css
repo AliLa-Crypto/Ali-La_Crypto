@@ -32,7 +32,7 @@
   display: inline-block;
 }
 
-/* Mobile view (nasconde label, mostra toggle hamburger) */
+/* --- GESTIONE MOBILE (LAYOUT DRAWER) --- */
 @media (max-width: 991.98px) {
   .hamburger-menu {
     display: block;
@@ -42,38 +42,57 @@
     cursor: pointer;
     border-radius: 8px;
     margin-bottom: 1rem;
+    width: 100%; /* Occupa tutta la larghezza */
+    text-align: center;
   }
 
   .sidebar {
-    display: none;
-    flex-direction: column;
-    background-color: #000000ee;
-    position: absolute;
-    top: 9.6rem;
-    left: 1.5rem;
-    width: 30%;
-    z-index: 1000;
-    padding: 1rem;
-    border-radius: 12px;
+    /* Diventa un cassetto laterale fisso */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%; /* Occupiamo l'80% della larghezza */
+    max-width: 300px; /* Limite massimo */
+    height: 100vh; /* Alto come tutto lo schermo */
+    z-index: 1050; /* Sopra tutto */
+    
+    background-color: #0a0a0a; /* Sfondo nero solido */
+    border-right: 1px solid #333;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.5);
+    
+    overflow-y: auto; /* Abilita scroll interno */
+    
+    /* Animazione */
+    transform: translateX(-100%); /* Nascosto a sinistra */
+    transition: transform 0.3s ease-in-out;
+    
+    /* Padding interno per il menu */
+    padding: 2rem 1rem;
   }
 
   .sidebar.open {
-    display: flex;
-  }
-
-  .sidebar-item .label {
-    display: inline-block;
+    transform: translateX(0); /* Mostra il cassetto */
+    display: flex; /* Assicurati sia flex */
   }
 }
 
-/* Desktop (lg+) */
+/* --- GESTIONE DESKTOP --- */
 @media (min-width: 992px) {
   .hamburger-menu {
-    display: none;
+    display: none; /* Nascondi hamburger su desktop */
   }
 
   .sidebar {
+    /* Su desktop, il menu è statico e normale */
+    display: flex; 
     position: static;
     background: none;
+    width: auto;
+    height: auto;
+    transform: none;
+    border-right: none;
+    box-shadow: none;
+    overflow-y: visible;
+    padding: 0; /* Resetta padding mobile */
   }
 }

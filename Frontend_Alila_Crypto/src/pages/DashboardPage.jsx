@@ -4,7 +4,7 @@ import { Container, Row, Col, Alert } from "react-bootstrap";
 import Sidebar from "@/Components/Dashboard/Sidebar";
 import LearnPage from "@/pages/Users/LearnPage";
 import api from "@/utils/api";
-import "@/styles/DashboardPage.css";
+import "@/styles/DashboardPage.css"; 
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -32,21 +32,18 @@ const DashboardPage = () => {
           setAccessMessage("Token mancante. Effettua il login.");
           return;
         }
-
         const endpoint =
           userLevel === "pro"
             ? "/pro"
             : userLevel === "intermedio"
             ? "/intermedio"
             : "/principiante";
-
         const res = await api.get(`/protected${endpoint}`);
         setAccessMessage(res.data.message);
       } catch (err) {
         setAccessMessage(err.response?.data?.message || "Errore nell'accesso.");
       }
     };
-
     if (userLevel) testAccess();
   }, [userLevel]);
 
@@ -78,44 +75,35 @@ const DashboardPage = () => {
     }
   };
 
+  // --- LAYOUT UNIFICATO E RESPONSIVE ---
   return (
-    <>
-      {/* Messaggio di accesso */}
+    <Container fluid className="pt-3 text-light">
       {accessMessage && (
-        <div className="px-3 pt-3 d-lg-none">
-          <Alert variant="info" className="mb-0">
-            {accessMessage}
-          </Alert>
-        </div>
+        <Alert variant="info" className="mb-3 mx-lg-3">
+          {accessMessage}
+        </Alert>
       )}
 
-      {/* ✅ Layout LG+ (fisso) */}
-      <Container fluid className="pt-3 text-light d-none d-lg-block">
-        {accessMessage && (
-          <Alert variant="info" className="mb-3">
-            {accessMessage}
-          </Alert>
-        )}
-        <Row className="gx-0">
-          <Col xs={12} md={3} lg={2} className="bg-black p-3 border-end border-secondary">
-            <Sidebar onSelect={setSelectedModule} selected={selectedModule} />
-          </Col>
-          <Col xs={12} md={9} lg={10} className="p-4">
-            <h3 className="mb-3">Livello: {userLevel}</h3>
-            {renderContent()}
-          </Col>
-        </Row>
-      </Container>
+      <Row className="gx-0">
+        {/* Questa colonna è la sidebar.
+          Su desktop (lg) è larga 2 colonne.
+          Su mobile (xs) è larga 12 (tutta la larghezza) e mostra solo l'hamburger.
+          Il menu vero e proprio si aprirà 'sopra' grazie al CSS (position: fixed).
+        */}
+        <Col xs={12} lg={2} className="bg-black p-3 border-end-lg border-secondary">
+          <Sidebar onSelect={setSelectedModule} selected={selectedModule} />
+        </Col>
 
-      {/* ✅ Layout SM/MD (mobile) */}
-      <div className="d-block d-lg-none p-4 text-light">
-        <Sidebar onSelect={setSelectedModule} selected={selectedModule} />
-        <div className="mt-4">
+        {/* Questa colonna è il contenuto.
+          Su desktop (lg) è larga 10 colonne.
+          Su mobile (xs) è larga 12 e va sotto l'hamburger.
+        */}
+        <Col xs={12} lg={10} className="p-4">
           <h3 className="mb-3">Livello: {userLevel}</h3>
           {renderContent()}
-        </div>
-      </div>
-    </>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

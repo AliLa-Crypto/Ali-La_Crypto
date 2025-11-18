@@ -5,7 +5,9 @@ import WhatYouCanDo from "../Components/HomePage/WhatYouCanDo";
 function HomePage() {
   return (
     <>
-      <HeroSection />
+      <div className="pb-3">
+        <HeroSection />
+      </div>
       <LevelSelector />
       <WhatYouCanDo />
     </>

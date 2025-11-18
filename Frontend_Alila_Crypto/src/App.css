@@ -64,8 +64,6 @@ nav-link-custom {
   padding-bottom: 0.5rem;
 }
 
-
-
 .nav-link-custom:focus {
   outline: 2px solid #FFC107; /* evidenzia il focus */
   outline-offset: 2px;
