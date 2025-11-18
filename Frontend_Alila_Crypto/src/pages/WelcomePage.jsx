@@ -1,101 +1,129 @@
-import React, { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Container, Button, Card, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Container, Row, Col, Alert } from "react-bootstrap"; 
 import { motion } from "framer-motion";
-import { FaBookOpen, FaUsers, FaChartLine, FaSmileBeam, FaRocket, FaGem } from "react-icons/fa";
-
-// ✅ componente “maiuscolo” derivato da motion
-const MotionDiv = motion.div;
+import { FaSmileBeam, FaRocket, FaGem, FaInfoCircle } from "react-icons/fa";
+import api from "@/utils/api";
 
 const WelcomePage = () => {
-  const { level } = useParams();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (level) {
-      localStorage.setItem("userLevel", level);
+  
+  const handleLevelSelect = async (level) => {
+    try {
+      const selectedLevel = level.toLowerCase();
+      await api.put(`/auth/profile`, { level: selectedLevel });
+      localStorage.setItem("userLevel", selectedLevel);
+      navigate(`/dashboard`);
+    } catch (err) {
+      console.error("Errore livello:", err);
+      // Fallback sicuro
+      localStorage.setItem("userLevel", level.toLowerCase());
+      navigate(`/dashboard`);
     }
-  }, [level]);
-
-  const levelInfo = {
-    principiante: {
-      title: "Benvenuto, Principiante!",
-      description: "Inizia il tuo viaggio nelle crypto con basi solide e strumenti facili da usare.",
-      color: "warning",
-    },
-    intermedio: {
-      title: "Benvenuto, Intermedio!",
-      description: "Approfondisci altcoin, NFT, staking e strategie intermedie.",
-      color: "success",
-    },
-    pro: {
-      title: "Benvenuto, Pro!",
-      description: "Trading avanzato, DeFi, DAO e strumenti professionali ti aspettano.",
-      color: "danger",
-    },
-  };
-
-  const iconMap = {
-    principiante: <FaSmileBeam size={40} className="text-warning mb-3" />,
-    intermedio: <FaRocket size={40} className="text-success mb-3" />,
-    pro: <FaGem size={40} className="text-danger mb-3" />,
-  };
-
-  const current = levelInfo[level] || {
-    title: "Benvenuto!",
-    description: "Scopri cosa puoi fare sulla nostra piattaforma.",
-    color: "light",
-  };
-
-  const currentIcon = iconMap[level] || <FaSmileBeam size={40} className="text-light mb-3" />;
-
-  const handleGoToDashboard = () => {
-    navigate(`/accademia/${level}`);
   };
 
   return (
-    <Container className="py-5 text-light">
-      <MotionDiv
-        initial={{ opacity: 0, y: 40 }}
+    <Container className="py-5 d-flex flex-column justify-content-center align-items-center" style={{ minHeight: "85vh" }}>
+      
+      {/* SEZIONE TITOLO (Senza stili inline) */}
+      <motion.div 
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        className="welcome-header-container" // Nuova classe CSS da App.css
       >
-        <Card bg="dark" text="light" className="shadow-lg p-4 mb-5" style={{ maxWidth: "700px", margin: "0 auto" }}>
-          <Card.Body className="text-center">
-            {currentIcon}
-            <h2 className={`text-${current.color} fw-bold mb-3`}>{current.title}</h2>
-            <p className="fs-5">{current.description}</p>
-            <Button variant={current.color} size="lg" className="mt-3" onClick={handleGoToDashboard}>
-              Vai alla Accademia
-            </Button>
-          </Card.Body>
-        </Card>
+        <h1 className="display-title mb-3">
+          Benvenuto in <span className="text-warning">Ali&La Crypto</span>
+        </h1>
+        
+        <p className="lead fs-3 mb-4 text-light">
+          Scegli il tuo punto di partenza.
+        </p>
+        
+        <p className="text-light opacity-75 fs-5 mb-4"> 
+          La tua esperienza sarà personalizzata in base a questa scelta. 
+          Non preoccuparti, il <strong>livello</strong> è solo un filtro iniziale per non annoiarti o confonderti.
+        </p>
 
-        <Row className="g-4 text-center">
-            <h1>Cosa puoi fare sulla piattaforma</h1>
-          <Col md={4}>
-            <div className="p-4 bg-dark rounded shadow-sm h-100">
-              <FaBookOpen size={40} className="mb-3 text-warning" />
-              <h4 className="fw-bold">Impara in base al tuo livello</h4>
-              <p className="large">Accedi a corsi, articoli e quiz pensati per il tuo profilo.</p>
+        <Alert variant="dark" className="d-inline-block border-secondary text-light bg-dark">
+          <div className="text-center text-light">
+            <FaInfoCircle className="me-2 text-info" />
+          Se non scegli, inizierai automaticamente come <strong>Principiante</strong>.
+          </div>
+          <div className="text-center text-light">
+            <FaInfoCircle className="me-2 text-info" />
+            Potrai cambiare livello in qualsiasi momento dal tuo <strong>Profilo</strong>.
+          </div>
+        </Alert>
+      </motion.div>
+
+      {/* SEZIONE CARDS */}
+      <Row className="g-4 w-100 justify-content-center">
+        
+        {/* Principiante */}
+        <Col md={6} lg={4}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1 }}
+            className="h-100"
+          >
+            <div className="crypto-card p-4 text-center" onClick={() => handleLevelSelect("principiante")}>
+              <div className="card-icon-wrapper">
+                <FaSmileBeam size={40} className="text-warning" />
+              </div>
+              <h3 className="text-warning mb-3">Principiante</h3>
+              <p className="card-desc text-light opacity-75">
+                Parti da zero? Impara cosa sono le crypto, come aprire un wallet e come proteggerti dalle truffe.
+              </p>
+              <div className="mt-3 badge bg-warning text-dark px-3 py-2 rounded-pill">Start Here</div>
             </div>
-          </Col>
-          <Col md={4}>
-            <div className="p-4 bg-dark rounded shadow-sm h-100">
-              <FaUsers size={40} className="mb-3 text-success" />
-              <h4 className="fw-bold">Unisciti alla community</h4>
-              <p className="large">Partecipa a forum, gruppi e discussioni tra utenti come te.</p>
+          </motion.div>
+        </Col>
+
+        {/* Intermedio */}
+        <Col md={6} lg={4}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="h-100"
+          >
+            <div className="crypto-card p-4 text-center" onClick={() => handleLevelSelect("intermedio")}>
+              <div className="card-icon-wrapper">
+                <FaRocket size={40} className="text-info" />
+              </div>
+              <h3 className="text-info mb-3">Intermedio</h3>
+              <p className="card-desc text-light opacity-75">
+                Hai già delle crypto? Scopri il mondo degli NFT, lo Staking e come usare gli Exchange decentralizzati.
+              </p>
+              <div className="mt-3 badge bg-info text-dark px-3 py-2 rounded-pill">Level Up</div>
             </div>
-          </Col>
-          <Col md={4}>
-            <div className="p-4 bg-dark rounded shadow-sm h-100">
-              <FaChartLine size={40} className="mb-3 text-danger" />
-              <h4 className="fw-bold">Monitora il mercato</h4>
-              <p className="large">Tieni d’occhio prezzi, portafoglio e trend in tempo reale.</p>
+          </motion.div>
+        </Col>
+
+        {/* Pro */}
+        <Col md={6} lg={4}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+            className="h-100"
+          >
+            <div className="crypto-card p-4 text-center" onClick={() => handleLevelSelect("pro")}>
+              <div className="card-icon-wrapper">
+                <FaGem size={40} className="text-danger" />
+              </div>
+              <h3 className="text-danger mb-3">Pro Trader</h3>
+              <p className="card-desc text-light opacity-75">
+                Per investitori esperti. Strategie di Trading, Analisi Tecnica avanzata e DeFi Yield Farming.
+              </p>
+              <div className="mt-3 badge bg-danger text-white px-3 py-2 rounded-pill">Max Power</div>
             </div>
-          </Col>
-        </Row>
-      </MotionDiv>
+          </motion.div>
+        </Col>
+
+      </Row>
+
     </Container>
   );
 };

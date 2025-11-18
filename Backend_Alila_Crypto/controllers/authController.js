@@ -21,7 +21,7 @@ export const register = async (req, res) => {
       username, 
       email, 
       password: hashedPassword,
-      level: (level || "principiante").toLowerCase(),
+      // level: (level || "principiante").toLowerCase(),
     });
     await newUser.save();
 
@@ -222,7 +222,7 @@ export const resetPassword = async (req, res) => {
 // Autenticazione con Google Popup
 export const loginWithGooglePopup = async (req, res) => {
   try {
-    const { token, level } = req.body; // Passo sia il token che il livello
+    const { token } = req.body; // Passo il token
 
     const ticket = await client.verifyIdToken({
       idToken: token,
@@ -248,7 +248,6 @@ export const loginWithGooglePopup = async (req, res) => {
         username: uniqueUsername,
         email: payload.email,
         socialID: payload.sub,
-        level: level || "principiante", // Prende il livello se presente
       });
 
       isNewUser = true;

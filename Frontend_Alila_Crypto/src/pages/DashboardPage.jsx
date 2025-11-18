@@ -1,105 +1,135 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Container, Row, Col, Alert } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
+// Import Componenti e Context
 import Sidebar from "@/Components/Dashboard/Sidebar";
 import LearnPage from "@/pages/Users/LearnPage";
-import api from "@/utils/api";
-import "@/styles/DashboardPage.css"; 
+import { useAuth } from "@/context/auth-context";
+import "@/styles/DashboardPage.css";
+
+// Import Cruscotti per Livello
+import PrincipianteCruscotto from "@/Components/Dashboard/Cruscotti/PrincipianteCruscotto";
+import IntermedioCruscotto from "@/Components/Dashboard/Cruscotti/IntermedioCruscotto";
+import ProCruscotto from "@/Components/Dashboard/Cruscotti/ProCruscotto";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
-  const { level: paramLevel } = useParams();
-  const [userLevel, setUserLevel] = useState("");
-  const [accessMessage, setAccessMessage] = useState("");
-  const [selectedModule, setSelectedModule] = useState("profile");
+  const { user, loading: authLoading } = useAuth(); 
+  
+  // Stato per la navigazione laterale (Default: 'dashboard')
+  const [selectedModule, setSelectedModule] = useState("dashboard");
+  
+  // Stato locale per forzare l'aggiornamento quando cambia il localStorage
+  const [currentLevel, setCurrentLevel] = useState("principiante");
 
+  // EFFETTO: Sincronizza il livello. 
+  // Priorità: 1. localStorage (Appena aggiornato) -> 2. User Token (Login) -> 3. Default
   useEffect(() => {
-    const storedLevel = localStorage.getItem("userLevel");
-    if (storedLevel) {
-      setUserLevel(storedLevel);
-    } else if (paramLevel) {
-      setUserLevel(paramLevel);
-    } else {
-      navigate("/login");
-    }
-  }, [paramLevel, navigate]);
-
-  useEffect(() => {
-    const testAccess = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          setAccessMessage("Token mancante. Effettua il login.");
-          return;
-        }
-        const endpoint =
-          userLevel === "pro"
-            ? "/pro"
-            : userLevel === "intermedio"
-            ? "/intermedio"
-            : "/principiante";
-        const res = await api.get(`/protected${endpoint}`);
-        setAccessMessage(res.data.message);
-      } catch (err) {
-        setAccessMessage(err.response?.data?.message || "Errore nell'accesso.");
+    const updateLevel = () => {
+      const stored = localStorage.getItem("userLevel");
+      // Se c'è un valore salvato manualmente, usalo. Altrimenti usa quello del token.
+      if (stored) {
+        setCurrentLevel(stored.toLowerCase());
+      } else if (user?.level) {
+        setCurrentLevel(user.level.toLowerCase());
       }
     };
-    if (userLevel) testAccess();
-  }, [userLevel]);
 
-  const renderContent = () => {
-    switch (selectedModule) {
-      case "learn":
-        return <LearnPage />;
-      case "forum":
-        return <p>💬 Forum community – Prossimamente!</p>;
-      case "portfolio":
-        return <p>📈 Portafoglio demo – Prossimamente!</p>;
-      case "profile":
-        return (
-          <>
-            <p>👤 Profilo utente con XP, livello e avatar.</p>
-            {userLevel === "principiante" && (
-              <p>Benvenuto! Inizia con i corsi base, crea il tuo wallet e fai il primo acquisto.</p>
-            )}
-            {userLevel === "intermedio" && (
-              <p>Pronto per approfondire? Scopri gli NFT, staking e gli exchange decentralizzati.</p>
-            )}
-            {userLevel === "pro" && (
-              <p>Benvenuto trader avanzato! Esplora la DeFi, DAO e strategie di yield farming.</p>
-            )}
-          </>
-        );
+    updateLevel();
+    
+    // Listener opzionale: se cambi pagina e torni, questo assicura che sia fresco
+    window.addEventListener('storage', updateLevel);
+    return () => window.removeEventListener('storage', updateLevel);
+  }, [user, selectedModule]); // Si aggiorna se cambia l'utente o se navighi nel menu
+
+  // Funzione che sceglie QUALE Cruscotto mostrare
+  const renderLevelDashboard = () => {
+    // Usiamo lo stato calcolato 'currentLevel' invece di 'user.level' diretto
+    switch (currentLevel) {
+      case "intermedio":
+        return <IntermedioCruscotto />;
+      case "pro":
+        return <ProCruscotto />;
+      case "principiante":
       default:
-        return <p>🔧 Sezione in sviluppo.</p>;
+        return <PrincipianteCruscotto />;
     }
   };
 
-  // --- LAYOUT UNIFICATO E RESPONSIVE ---
-  return (
-    <Container fluid className="pt-3 text-light">
-      {accessMessage && (
-        <Alert variant="info" className="mb-3 mx-lg-3">
-          {accessMessage}
-        </Alert>
-      )}
+  // Funzione principale che decide il CONTENUTO
+  const renderContent = () => {
+    if (authLoading && !user) {
+      return (
+        <div className="text-center py-5">
+          <Spinner animation="border" variant="warning" />
+          <p className="mt-3">Caricamento dashboard...</p>
+        </div>
+      );
+    }
 
+    switch (selectedModule) {
+      case "dashboard":
+        return renderLevelDashboard();
+        
+      case "learn":
+        return <LearnPage />;
+        
+      case "forum":
+        return (
+            <div className="text-center py-5">
+                <h3>💬 Community Forum</h3>
+                <p className="lead">Stiamo costruendo uno spazio sicuro per discutere.</p>
+                <span className="badge bg-warning text-dark">In Arrivo</span>
+            </div>
+        );
+        
+      case "portfolio":
+        return (
+            <div className="text-center py-5">
+                <h3>📈 Portfolio Tracker</h3>
+                <p className="lead">Tieni traccia dei tuoi investimenti in tempo reale.</p>
+                <span className="badge bg-info text-dark">In Arrivo</span>
+            </div>
+        );
+        
+      case "profile":
+        return (
+            <div className="bg-dark p-5 rounded border border-secondary text-center">
+                <h3>👤 Il tuo Profilo</h3>
+                <p className="text-muted mb-4">Gestisci avatar, bio, password e cambia il tuo livello di esperienza.</p>
+                <button 
+                    className="btn btn-warning btn-lg" 
+                    onClick={() => navigate('/profile')} 
+                >
+                    Vai alla Pagina Profilo Completa
+                </button>
+            </div>
+        );
+
+      default:
+        return renderLevelDashboard();
+    }
+  };
+
+  return (
+    <Container fluid className="pt-3 text-light dashboard-container">
       <Row className="gx-0">
-        {/* Questa colonna è la sidebar.
-          Su desktop (lg) è larga 2 colonne.
-          Su mobile (xs) è larga 12 (tutta la larghezza) e mostra solo l'hamburger.
-          Il menu vero e proprio si aprirà 'sopra' grazie al CSS (position: fixed).
-        */}
-        <Col xs={12} lg={2} className="bg-black p-3 border-end-lg border-secondary">
-          <Sidebar onSelect={setSelectedModule} selected={selectedModule} />
+        
+        {/* SIDEBAR (Mobile First) */}
+        <Col xs={12} lg={2} className="bg-black p-3 border-end-lg border-secondary sidebar-wrapper">
+          <Sidebar 
+            onSelect={setSelectedModule} 
+            selected={selectedModule} 
+          />
         </Col>
 
-        {/* Questa colonna è il contenuto.
-          Su desktop (lg) è larga 10 colonne.
-          Su mobile (xs) è larga 12 e va sotto l'hamburger.
-        */}
-        <Col xs={12} lg={10} className="p-4">
-          <h3 className="mb-3">Livello: {userLevel}</h3>
+        {/* CONTENUTO PRINCIPALE */}
+        <Col xs={12} lg={10} className="p-4 content-wrapper">
+          <div className="d-block d-lg-none mb-3 text-end">
+             <span className="badge bg-secondary text-capitalize">Livello: {currentLevel}</span>
+          </div>
+
           {renderContent()}
         </Col>
       </Row>

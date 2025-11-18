@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
-import { Container, Form, Button, Card, Row, Col, Alert } from "react-bootstrap";
+import { Container, Form, Button, Card, Row, Col } from "react-bootstrap";
 import api from "@/utils/api";
 import { useAuth } from "../context/auth-context";
 import { useNavigate } from "react-router-dom";
 import AvatarModal from "@/Components/Profile/AvatarModal";
 import "@/styles/ProfilePage.css";
 import { FaPlusCircle, FaPen } from "react-icons/fa";
+import { toast } from "react-toastify"; 
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState({
     avatarURL: localStorage.getItem("avatarURL") || "",
+    level: "principiante" // Valore di default
   });
 
   const [bio, setBio] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  
   const { login, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -26,9 +28,10 @@ const ProfilePage = () => {
         setUserData(res.data);
         localStorage.setItem("avatarURL", res.data.avatarURL || "");
         setBio(res.data.bio || "");
+        // Nota: Non dobbiamo più settare il livello selezionato
       } catch (err) {
         console.error("Errore nel caricamento profilo:", err);
-        navigate("/login");
+        toast.error("Impossibile caricare il profilo.");
       }
     };
 
@@ -37,37 +40,46 @@ const ProfilePage = () => {
 
   const handleSave = async () => {
     try {
-      await api.put(`/auth/profile`, { bio });
-      setSuccessMessage("✅ Profilo aggiornato con successo!");
+      // Inviamo SOLO la bio, il livello non cambia da qui
+      await api.put(`/auth/profile`, { 
+        bio
+      });
+
+      toast.success("✅ Profilo aggiornato con successo!");
+      
       setUserData(prev => ({ ...prev, bio }));
-      setBio("");
+      // Non aggiorniamo il localStorage del livello perché non è cambiato
+      
+      // Refresh del context per sicurezza (opzionale se cambia solo la bio)
+      const token = localStorage.getItem("token");
+      if(token) login(token);
+
       document.getElementById("bio-section")?.scrollIntoView({ behavior: "smooth" });
     } catch (err) {
       console.error(err);
-      setSuccessMessage("❌ Errore durante il salvataggio.");
+      toast.error("❌ Errore durante il salvataggio.");
     }
   };
 
   const handleUpload = async () => {
-    if (!selectedFile) return alert("Nessun file selezionato");
+    if (!selectedFile) return toast.warning("⚠️ Nessun file selezionato");
 
     const formData = new FormData();
     formData.append("avatar", selectedFile);
 
     try {
       const res = await api.post(`/auth/upload-avatar`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
       setUserData(prev => ({ ...prev, avatarURL: res.data.avatarURL }));
       localStorage.setItem("avatarURL", res.data.avatarURL);
       login(localStorage.getItem("token"));
-      setSuccessMessage("✅ Avatar caricato con successo!");
+      
+      toast.success("✅ Avatar caricato con successo!"); 
     } catch (err) {
       console.error(err);
-      setSuccessMessage("❌ Errore durante l'upload dell'immagine.");
+      toast.error("❌ Errore durante l'upload dell'immagine."); 
     }
   };
 
@@ -76,6 +88,7 @@ const ProfilePage = () => {
     localStorage.removeItem("userLevel");
     logout();
     navigate("/login");
+    toast.info("👋 Logout effettuato.");
   };
 
   if (!userData) return <p className="text-light p-5">Caricamento...</p>;
@@ -129,11 +142,24 @@ const ProfilePage = () => {
 
               <h5 className="mt-4">🔗 Moduli rapidi</h5>
               <div className="d-flex flex-column gap-2">
-                <Button variant="outline-light" onClick={() => navigate("/dashboard")}>🏠 Dashboard</Button>
-                <Button variant="outline-light" onClick={() => navigate("/learn")}>📚 Educazione</Button>
-                <Button variant="outline-light" onClick={() => navigate("/forum")}>💬 Community</Button>
-                <Button variant="outline-light" onClick={() => navigate("/portfolio")}>📈 Portfolio</Button>
-                <Button variant="outline-light" onClick={() => navigate("/finanza")}>💼 Finanza</Button>
+                <Button variant="outline-light" onClick={() => navigate("/dashboard")}>
+                  🏠 Dashboard
+                </Button>
+                <Button variant="outline-light" onClick={() => navigate("/learn")}>
+                  📚 Educazione
+                </Button>
+                <Button variant="outline-light" onClick={() => navigate("/forum")}>
+                  💬 Community
+                </Button>
+                <Button variant="outline-light" onClick={() => navigate("/portfolio")}>
+                  📈 Portfolio
+                </Button>
+                <Button variant="outline-light" onClick={() => navigate("/finanza")}>
+                  💼 Finanza
+                </Button>
+                <Button variant="outline-info" onClick={() => navigate("/change-level")}>
+                  🔄 Cambia Livello
+                </Button>
                 {userData.isAdmin && (
                   <Button variant="outline-warning" onClick={() => navigate("/admin/dashboard")}>
                     🛠️ Admin
@@ -147,8 +173,13 @@ const ProfilePage = () => {
               <h2 className="mb-4">👩‍💻 Informazioni utente</h2>
               <p><strong>Username:</strong> {userData.username}</p>
               <p><strong>Email:</strong> {userData.email}</p>
-              <p><strong>Livello:</strong> {userData.level}</p>
-              <p><strong>XP:</strong> {userData.xp}</p>
+              
+              {/* MODIFICA: Visualizzazione Livello (Statica) */}
+              <p><strong>Livello Attuale:</strong> <span className="text-uppercase text-info fw-bold">{userData.level}</span></p>
+              
+              <p><strong>XP Totali:</strong> <span className="text-warning">{userData.xp || 0}</span></p>
+
+              {/* RIMOSSO: Menu a tendina selezione livello */}
 
               <div id="bio-section">
                 <Form.Group className="my-4">
@@ -171,14 +202,8 @@ const ProfilePage = () => {
                 </div>
               )}
 
-              {successMessage && (
-                <Alert variant={successMessage.startsWith("✅") ? "success" : "danger"}>
-                  {successMessage}
-                </Alert>
-              )}
-
               <Row className="mt-4">
-                <Col><Button variant="success" className="w-100" onClick={handleSave}>💾 Salva</Button></Col>
+                <Col><Button variant="success" className="w-100" onClick={handleSave}>💾 Salva Bio</Button></Col>
                 <Col><Button variant="outline-danger" className="w-100" onClick={handleLogout}>🚪 Esci</Button></Col>
               </Row>
             </Col>

@@ -1,4 +1,23 @@
+/* === 1. IMPORT FONT === */
+/* === 1. IMPORT FONT === */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
+/* ... (il resto degli stili globali) ... */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
+
+/* === 2. STILI GLOBALI === */
+:root {
+  --primary-gold: #FFC107;
+  --primary-dark: #050505;
+  --card-bg: rgba(30, 30, 40, 0.7);
+  --neon-glow: 0 0 15px rgba(255, 193, 7, 0.3);
+}
+
 body, html {
+  font-family: 'Poppins', sans-serif;
+  /* Gradiente Deep Space */
+  background: linear-gradient(135deg, #020024 0%, #090979 35%, #000000 100%);
+  background-attachment: fixed;
+  color: #ffffff;
   min-height: 100vh;
   overflow-x: hidden;
   margin: 0;
@@ -11,163 +30,171 @@ body, html {
 }
 
 .app-content {
-  flex: 1; /* prende tutto lo spazio disponibile */
+  flex: 1;
 }
 
-/* Rende il menu a tendina assoluto rispetto al body */
-.dropdown-absolute .dropdown-menu {
-  position: absolute !important;
-  top: 90% !important;
-  left: 0;
-  z-index: 1050;
-  margin-top: 0.5rem;
+/* === 3. TIPOGRAFIA & TITOLI === */
+h1, h2, h3, .hero-title, .card-title {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1.5px;
 }
 
-/* NAVBAR ICON STYLING */
-.navbar-icon-link {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: white !important;
-  font-size: 2rem !important;
-  padding: 0.6rem !important;
-  position: relative !important;
+/* FIX 1: Nuovo Font per il Brand */
+.navbar-brand {
+  font-family: 'Montserrat', sans-serif; /* Font più semplice e leggibile per il logo */
+  letter-spacing: 0.5px;
+}
+
+/* Titoli Giganti (Welcome Page) */
+.display-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  /* FIX ERRORE: Aggiunto il trattino mancante */
+  background: -webkit-linear-gradient(#fff, #ccc);
+  -webkit-background-clip: text; 
+  background-clip: text; /* Standard */
+  color: transparent; /* Necessario per vedere il gradiente sul testo */
+}
+
+/* Classe per sostituire lo stile inline maxWidth */
+.welcome-header-container {
+  max-width: 900px; /* Allargato da 800 a 900 per dare respiro */
+  margin: 0 auto 3rem auto; /* Centrato con margine sotto */
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .display-title {
+    font-size: 2.2rem;
+  }
+}
+
+/* === 4. CARD DESIGN (Crypto Style) === */
+.crypto-card {
+  background-color: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  overflow: hidden;
+  height: 100%;
+}
+
+.crypto-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--primary-gold);
+  box-shadow: var(--neon-glow);
   cursor: pointer;
 }
 
-.navbar-icon-link:hover::after,
-.navbar-icon-link:focus::after {
-  content: attr(data-tooltip) !important;
-  position: absolute !important;
-  bottom: -2.2rem !important;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #222831 !important;
-  color: #fff !important;
-  font-size: 1.2rem !important;
-  padding: 0.4rem 0.8rem !important;
-  border-radius: 8px !important;
-  white-space: nowrap !important;
-  opacity: 1 !important;
-  pointer-events: none;
-  z-index: 9999 !important;
-  box-shadow: 0 2px 8px #0002;
+.card-icon-wrapper {
+  background: rgba(255, 255, 255, 0.05);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  transition: transform 0.3s ease;
 }
 
-offcanvas-scroll {
-  min-height: 90vh;
-  overflow-y: auto;
+.crypto-card:hover .card-icon-wrapper {
+  transform: rotate(15deg) scale(1.1);
+  background: rgba(255, 193, 7, 0.1);
 }
 
-nav-link-custom {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+.card-desc {
+  color: #d1d1d1;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
-.nav-link-custom:focus {
-  outline: 2px solid #FFC107; /* evidenzia il focus */
-  outline-offset: 2px;
-  background: #f0f2f522; /* leggera evidenza sul background */
+/* === 5. NAVBAR PROFESSIONALE (Fusione Old + New) === */
+.navbar {
+  background: rgba(0, 0, 0, 0.9) !important; /* Quasi nero solido */
+  backdrop-filter: blur(15px);
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  min-height: 80px; /* Forza un'altezza minima importante */
 }
 
-.brand-title {
-  font-size: 1.6rem;
+/* Logo Grande */
+.navbar-brand img {
+  height: 55px !important; /* Altezza fissa importante */
+  width: auto;
+  transition: transform 0.3s ease;
 }
 
-.navbar-custom {
-  padding-top: 1.5rem !important;
-  padding-bottom: 1.5rem !important;
+.navbar-brand:hover img {
+  transform: scale(1.05);
 }
 
-.navbar-brand-responsive {
-  margin-left: 2rem !important;
-  margin-right: 2rem !important;
+/* Testi Menu Grandi */
+.nav-link {
+  font-size: 1.7rem !important; /* Aumentato per leggibilità */
+  font-weight: 500;
+  margin: 0 10px;
+  color: #e0e0e0 !important;
+  transition: color 0.3s ease;
 }
 
-
-@media (min-width: 1200px) {
-  .brand-title {
-    font-size: 2.3rem;
-  }
+.nav-link:hover, .nav-link.active {
+  color: var(--primary-gold) !important;
+  text-shadow: 0 0 8px rgba(255, 193, 7, 0.4);
 }
 
-@media (max-width: 767px) {
-  .sidebar {
-    position: fixed;
-    z-index: 1040;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 70%;
-    background-color: #000 !important;
-    overflow-y: auto;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .sidebar.open {
-    transform: translateX(0);
-  }
-
-  .sidebar-toggle {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 1050;
-    background-color: #0dcaf0;
-    border: none;
-    border-radius: 5px;
-    padding: 0.5rem;
-    color: #000;
-    font-weight: bold;
-  }
-
-  .app-content {
-    margin-left: 0 !important;
-    padding: 1rem;
-  }
+/* Icone nel menu (se usate) */
+.navbar-icon-link {
+  font-size: 1.9rem; /* Dimensione icona */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem !important;
+  color: #e0e0e0 !important;
 }
 
-/* Nascondi tooltip su mobile */
+/* === 6. FIX MOBILE NAVBAR & SIDEBAR === */
+/* Questo impedisce al logo e all'hamburger di andare a capo */
+.navbar > .container-fluid {
+  display: flex;
+  flex-wrap: nowrap !important; 
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+  padding: 0.5rem 0.8rem; /* Bottone più grande */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 193, 7, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
 @media (max-width: 991px) {
-  .navbar-icon-link:hover::after,
-  .navbar-icon-link:focus::after {
-    display: none !important;
+  .sidebar-wrapper {
+     display: none; /* Nasconde sidebar desktop su mobile */
+  }
+  
+  /* Su mobile, centriamo un po' meglio il logo */
+  .navbar-brand img {
+    height: 45px !important; /* Leggermente più piccolo su mobile ma visibile */
   }
 }
 
-@media (max-width: 600px) {
-  
-  .navbar-brand-responsive {
-    margin-left: 0.1rem !important;
-    margin-right: 0.3rem !important;
-    max-width: 70vw !important;
-    min-width: 0 !important;
-    flex-shrink: 1;
+/* FIX 2: Allineamento Logo - Solo su Desktop */
+@media (min-width: 992px) { /* Applica solo su schermi grandi (Desktop/lg) */
+  .navbar-brand {
+    margin-left: 3rem; /* Margine solo su Desktop, come da te richiesto */
   }
-  .navbar-brand-responsive img {
-    width: 30px !important;
-    height: 30px !important;
-    margin-right: 4px !important;
-    padding-bottom: 4px !important;
-  }
-  .brand-title {
-    font-size: 1.10rem !important;
-    white-space: nowrap !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 60vw !important;
-    vertical-align: middle;
-  }
-  .navbar-custom {
-    padding-top: 0.7rem !important;
-    padding-bottom: 1.2rem !important;
-    padding-left: 0.1rem !important;
-    padding-right: 0.1rem !important;
-    min-height: 48px !important;
-  }
-  .navbar-icon-link {
-    font-size: 1.45rem !important;
-    padding: 0.2rem 0.2rem !important;
+}
+
+@media (max-width: 991px) { /* Fix Mobile: Rimuove margini larghi */
+  .navbar-brand {
+    margin-left: 0.5rem; /* Margine piccolo sul logo per mobile */
   }
 }

@@ -2,13 +2,16 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
+// TOASTIFY E IL SUO CSS
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // Navbar/Footer li lascio non-lazy (sono globali e leggeri)
 import { MyNavbar } from "./Components/MyNavbar";
 import Footer from "./Components/Footer";
 
 /* === Lazy pages/components === */
 const HomePage              = lazy(() => import("@/pages/HomePage"));
-const SelectLevelPage       = lazy(() => import("@/pages/SelectLevelPage"));
 const RegisterPage          = lazy(() => import("@/pages/Register-Login/RegisterPage"));
 const LoginPage             = lazy(() => import("@/pages/Register-Login/LoginPage"));
 const ForgotPasswordPage    = lazy(() => import("@/pages/Register-Login/ForgotPasswordPage"));
@@ -43,24 +46,39 @@ const GlossarioPage         = lazy(() => import("@/pages/GlossarioPage"));
 const FinanzaPage           = lazy(() => import("@/pages/FinanzaPage"));
 const ForumPage             = lazy(() => import("@/pages/ForumPage"));
 const PortfolioPage         = lazy(() => import("@/pages/PortfolioPage"));
+const ChangeLevelPage = lazy(() => import("@/pages/ChangeLevelPage"));
 
 function App() {
   return (
     <Router>
       <MyNavbar />
+
+      {/* IL COMPONENTE QUI (sopra il contenuto) */}
+      <ToastContainer 
+        position="top-right" 
+        autoClose={3000} 
+        hideProgressBar={false} 
+        newestOnTop={false} 
+        closeOnClick 
+        rtl={false} 
+        pauseOnFocusLoss 
+        draggable 
+        pauseOnHover 
+        theme="dark" 
+      />
+
       <div className="app-content">
         {/* Fallback minimale per non tirare dentro react-bootstrap nello startup */}
         <Suspense fallback={<div className="p-5 text-center">Caricamento…</div>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
 
-            <Route path="/register" element={<SelectLevelPage />} />
-            <Route path="/register/:level" element={<RegisterPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/welcome" element={<WelcomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
-            <Route path="/welcome/:level" element={<WelcomePage />} />
             <Route path="/dashboard/:level" element={<DashboardPage />} />
             <Route path="/dashboard" element={<RedirectToUserDashboard />} />
 
@@ -95,6 +113,7 @@ function App() {
             <Route path="/finanza" element={<FinanzaPage />} />
             <Route path="/forum" element={<ForumPage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
+            <Route path="/change-level" element={<ChangeLevelPage />} />
           </Routes>
         </Suspense>
       </div>

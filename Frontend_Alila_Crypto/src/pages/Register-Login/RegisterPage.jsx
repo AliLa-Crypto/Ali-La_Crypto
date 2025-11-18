@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, InputGroup, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,27 +10,11 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useAuth } from "@/context/auth-context";
 
 function RegisterPage() {
-  const { level } = useParams(); // es. 'principiante', 'intermedio', 'pro'
+  
   const navigate = useNavigate();
   const { login } = useAuth();
   const [serverError, setServerError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
-  // ✅ Salva il livello scelto in localStorage (serve per Google)
-  useEffect(() => {
-    if (level) {
-      localStorage.setItem("level", level.toLowerCase());
-    }
-  }, [level]);
-
-  const formattedLevel =
-    level === "principiante"
-      ? "Principiante"
-      : level === "intermedio"
-      ? "Intermedio"
-      : level === "pro"
-      ? "Pro"
-      : "";
 
   const schema = Yup.object().shape({
     username: Yup.string().required("Username obbligatorio"),
@@ -55,13 +39,12 @@ function RegisterPage() {
         username: data.username,
         email: data.email,
         password: data.password,
-        level: formattedLevel || "principiante",
       });
 
       if (response.status === 201) {
         const token = response.data.token;
         if (token) login(token);
-        navigate(`/welcome/${level}`);
+        navigate(`/welcome`);
       }
     } catch (err) {
       if (err.response?.data?.message) {
@@ -78,12 +61,6 @@ function RegisterPage() {
 
       <Form onSubmit={handleSubmit(onSubmit)} className="bg-dark p-4 rounded shadow">
         {serverError && <Alert variant="danger">{serverError}</Alert>}
-
-        {level && (
-          <p className="mb-3">
-            Livello selezionato: <strong>{formattedLevel}</strong>
-          </p>
-        )}
 
         <Form.Group className="mb-3">
           <Form.Label>Username</Form.Label>
@@ -154,7 +131,6 @@ function RegisterPage() {
         <GoogleLogin
           onSuccess={async (credentialResponse) => {
             const googleToken = credentialResponse.credential;
-            const levelFromStorage = localStorage.getItem("level") || "principiante";
 
             if (!googleToken) {
               alert("Token Google mancante");
@@ -164,14 +140,13 @@ function RegisterPage() {
             try {
               const response = await api.post(`/auth/google-popup`, {
                 token: googleToken,
-                level: levelFromStorage,
               });
 
               const { token, user, isNewUser } = response.data;
               login(token);
 
               if (isNewUser) {
-                navigate(`/welcome/${user.level.toLowerCase()}`);
+                navigate(`/welcome`);
               } else {
                 navigate(`/dashboard/${user.level.toLowerCase()}`);
               }
