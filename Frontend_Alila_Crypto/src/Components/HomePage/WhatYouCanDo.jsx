@@ -1,4 +1,3 @@
-import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { FaBookOpen, FaUsers, FaChartLine } from "react-icons/fa";
 import "@/styles/WhatYouCanDo.css";

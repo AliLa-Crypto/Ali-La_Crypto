@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
-// ✅ NUOVI IMPORT
 import { motion, AnimatePresence } from "framer-motion";
 
 // TOASTIFY E IL SUO CSS
@@ -53,7 +52,7 @@ const ForumPage             = lazy(() => import("@/pages/ForumPage"));
 const PortfolioPage         = lazy(() => import("@/pages/PortfolioPage"));
 const ChangeLevelPage = lazy(() => import("@/pages/ChangeLevelPage"));
 
-// ✅ 1. DEFINISCI IL WRAPPER DI TRANSIZIONE PER SINGOLA PAGINA
+// 1. DEFINISCI IL WRAPPER DI TRANSIZIONE PER SINGOLA PAGINA
 const PageTransitionWrapper = ({ children }) => {
   return (
     <MotionDiv
@@ -187,7 +186,7 @@ const AnimatedRoutes = () => {
 }
 
 
-// 🎯 3. FUNZIONE PRINCIPALE APP CHE RITORNA IL LAYOUT (semplificata)
+// 3. FUNZIONE PRINCIPALE APP CHE RITORNA IL LAYOUT (semplificata)
 function App() {
   return (
     <Router>
@@ -210,7 +209,6 @@ function App() {
       <div className="app-content">
         {/* Fallback minimale per non tirare dentro react-bootstrap nello startup */}
         <Suspense fallback={<div className="p-5 text-center">Caricamento…</div>}>
-          {/* Sostituisci il vecchio blocco <Routes> con AnimatedRoutes */}
           <AnimatedRoutes />
         </Suspense>
       </div>

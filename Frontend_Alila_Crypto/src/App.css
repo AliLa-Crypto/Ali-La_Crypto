@@ -1,5 +1,4 @@
 /* === 1. IMPORT FONT === */
-/* === 1. IMPORT FONT === */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
 /* ... (il resto degli stili globali) ... */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
@@ -50,7 +49,6 @@ h1, h2, h3, .hero-title, .card-title {
   font-size: 3.5rem;
   font-weight: 900;
   text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-  /* FIX ERRORE: Aggiunto il trattino mancante */
   background: -webkit-linear-gradient(#fff, #ccc);
   -webkit-background-clip: text; 
   background-clip: text; /* Standard */
@@ -59,7 +57,7 @@ h1, h2, h3, .hero-title, .card-title {
 
 /* Classe per sostituire lo stile inline maxWidth */
 .welcome-header-container {
-  max-width: 900px; /* Allargato da 800 a 900 per dare respiro */
+  max-width: 900px;
   margin: 0 auto 3rem auto; /* Centrato con margine sotto */
   text-align: center;
 }
@@ -159,13 +157,12 @@ h1, h2, h3, .hero-title, .card-title {
 
 @media (min-width: 992px) { 
   .navbar-icon-link {
-    font-size: 1.5rem !important; /* Riduci da 1.9rem a 1.5rem */
+    font-size: 1.5rem !important;
     padding: 0.5rem !important;
   }
 }
 
 /* === 6. FIX MOBILE NAVBAR & SIDEBAR === */
-/* Questo impedisce al logo e all'hamburger di andare a capo */
 .navbar > .container-fluid {
   display: flex;
   flex-wrap: nowrap !important; 

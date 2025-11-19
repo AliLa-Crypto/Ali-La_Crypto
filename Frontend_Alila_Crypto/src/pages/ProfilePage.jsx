@@ -28,7 +28,6 @@ const ProfilePage = () => {
         setUserData(res.data);
         localStorage.setItem("avatarURL", res.data.avatarURL || "");
         setBio(res.data.bio || "");
-        // Nota: Non dobbiamo più settare il livello selezionato
       } catch (err) {
         console.error("Errore nel caricamento profilo:", err);
         toast.error("Impossibile caricare il profilo.");
@@ -40,7 +39,7 @@ const ProfilePage = () => {
 
   const handleSave = async () => {
     try {
-      // Inviamo SOLO la bio, il livello non cambia da qui
+      // Inviamo la bio
       await api.put(`/auth/profile`, { 
         bio
       });
@@ -48,9 +47,8 @@ const ProfilePage = () => {
       toast.success("✅ Profilo aggiornato con successo!");
       
       setUserData(prev => ({ ...prev, bio }));
-      // Non aggiorniamo il localStorage del livello perché non è cambiato
       
-      // Refresh del context per sicurezza (opzionale se cambia solo la bio)
+      // Refresh del context per sicurezza
       const token = localStorage.getItem("token");
       if(token) login(token);
 
@@ -174,12 +172,10 @@ const ProfilePage = () => {
               <p><strong>Username:</strong> {userData.username}</p>
               <p><strong>Email:</strong> {userData.email}</p>
               
-              {/* MODIFICA: Visualizzazione Livello (Statica) */}
+              {/* Visualizzazione Livello (Statica) */}
               <p><strong>Livello Attuale:</strong> <span className="text-uppercase text-info fw-bold">{userData.level}</span></p>
               
               <p><strong>XP Totali:</strong> <span className="text-warning">{userData.xp || 0}</span></p>
-
-              {/* RIMOSSO: Menu a tendina selezione livello */}
 
               <div id="bio-section">
                 <Form.Group className="my-4">
