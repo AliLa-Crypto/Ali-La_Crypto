@@ -15,7 +15,7 @@
 body, html {
   font-family: 'Poppins', sans-serif;
   /* Gradiente Deep Space */
-  background: linear-gradient(135deg, #020024 0%, #090979 35%, #000000 100%);
+  background: linear-gradient(135deg, #020024 0%, #090985 35%, #0a070c 100%);
   background-attachment: fixed;
   color: #ffffff;
   min-height: 100vh;
@@ -119,7 +119,7 @@ h1, h2, h3, .hero-title, .card-title {
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  min-height: 80px; /* Forza un'altezza minima importante */
+  min-height: 70px; /* Forza un'altezza minima importante */
 }
 
 /* Logo Grande */
@@ -155,6 +155,13 @@ h1, h2, h3, .hero-title, .card-title {
   justify-content: center;
   padding: 0.6rem !important;
   color: #e0e0e0 !important;
+}
+
+@media (min-width: 992px) { 
+  .navbar-icon-link {
+    font-size: 1.5rem !important; /* Riduci da 1.9rem a 1.5rem */
+    padding: 0.5rem !important;
+  }
 }
 
 /* === 6. FIX MOBILE NAVBAR & SIDEBAR === */

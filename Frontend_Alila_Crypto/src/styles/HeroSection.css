@@ -1,9 +1,9 @@
 .hero-section {
-  min-height: 50vh !important;
+  min-height: 40vh;
+  padding: 6rem 1rem !important;
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 1rem;
   align-items: center;
 }
 
@@ -29,7 +29,7 @@
 /* Desktop (lg e oltre) */
 @media (min-width: 992px) {
   .hero-img {
-    max-width: 55% !important;
+    max-width: 40% !important;
   }
 }
 
@@ -51,7 +51,7 @@
 /* Mobile (sm) */
 @media (max-width: 767.98px) {
   .hero-img {
-    max-width: 60% !important; 
+    max-width: 70% !important; 
   }
 
   .hero-subtitle {

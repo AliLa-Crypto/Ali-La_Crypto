@@ -28,7 +28,7 @@ const ChangeLevelPage = () => {
 
       <div className="text-center mb-5">
         <h1 className="display-5 fw-bold mb-3">Cambia il tuo Percorso</h1>
-        <p className="lead text-muted" style={{ maxWidth: "700px", margin: "0 auto" }}>
+        <p className="lead text-info fw-bold" style={{ maxWidth: "700px", margin: "0 auto" }}>
             Le tue competenze sono cresciute? O vuoi ripassare le basi? <br/>
             Cambia livello per sbloccare un cruscotto diverso.
         </p>

@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { FaSmileBeam, FaRocket, FaGem, FaInfoCircle } from "react-icons/fa";
 import api from "@/utils/api";
 
+const MotionDiv = motion.div;
+
 const WelcomePage = () => {
   const navigate = useNavigate();
   
@@ -25,7 +27,7 @@ const WelcomePage = () => {
     <Container className="py-5 d-flex flex-column justify-content-center align-items-center" style={{ minHeight: "85vh" }}>
       
       {/* SEZIONE TITOLO (Senza stili inline) */}
-      <motion.div 
+      <MotionDiv 
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -54,14 +56,14 @@ const WelcomePage = () => {
             Potrai cambiare livello in qualsiasi momento dal tuo <strong>Profilo</strong>.
           </div>
         </Alert>
-      </motion.div>
+      </MotionDiv>
 
       {/* SEZIONE CARDS */}
       <Row className="g-4 w-100 justify-content-center">
         
         {/* Principiante */}
         <Col md={6} lg={4}>
-          <motion.div 
+          <MotionDiv 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.1 }}
@@ -77,12 +79,12 @@ const WelcomePage = () => {
               </p>
               <div className="mt-3 badge bg-warning text-dark px-3 py-2 rounded-pill">Start Here</div>
             </div>
-          </motion.div>
+          </MotionDiv>
         </Col>
 
         {/* Intermedio */}
         <Col md={6} lg={4}>
-          <motion.div 
+          <MotionDiv 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
@@ -98,12 +100,12 @@ const WelcomePage = () => {
               </p>
               <div className="mt-3 badge bg-info text-dark px-3 py-2 rounded-pill">Level Up</div>
             </div>
-          </motion.div>
+          </MotionDiv>
         </Col>
 
         {/* Pro */}
         <Col md={6} lg={4}>
-          <motion.div 
+          <MotionDiv 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
@@ -119,7 +121,7 @@ const WelcomePage = () => {
               </p>
               <div className="mt-3 badge bg-danger text-white px-3 py-2 rounded-pill">Max Power</div>
             </div>
-          </motion.div>
+          </MotionDiv>
         </Col>
 
       </Row>

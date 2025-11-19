@@ -7,7 +7,7 @@ const ExchangePage = () => {
     <Container fluid className="py-5 px-4">
       <Row className="gx-5">
         
-        <Col xs={12} md={4} lg={3} className="text-white px-3 mb-4 mb-md-0">
+        <Col xs={12} md={4} lg={3} className="text-white px-3 mb-4 mb-md-0 ">
           <div className="p-3 rounded text-white shadow-sm fw-bold bg-dark">
             <h5 className="mb-3">🔁 Exchange Affidabili</h5>
             <ul className="list-unstyled">
